@@ -66,6 +66,10 @@ public class Main {
 
 							}
 						}
+
+						else if (mainselect == 3){
+							BasketController.showBasketList(member.getId());
+						}
 					}
 				}
 			}
