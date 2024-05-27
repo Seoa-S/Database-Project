@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="5d824e5b-a5b7-4a90-bd30-ba1ac2dc2a0c" name="Changes" comment="" />
+=======
+    <list default="true" id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Database-Project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_232.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" afterDir="false" />
+    </list>
+>>>>>>> kebranch
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +28,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+<<<<<<< HEAD
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2h2mqwj2dw1A6VJzehUYbDHOm1x" />
+=======
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kaeun0813&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Seoa-S/Database-Project.git&quot;,
+    &quot;accountId&quot;: &quot;c94532ac-42ff-458b-8b80-52a6d6b74abd&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2h2sCOU5X1rAczC2jRez6FUhVZu" />
+>>>>>>> kebranch
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,6 +60,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "jeesoo",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/kimjeesoo/ewha/3-1/데이터베이스/Database-Project/src",
@@ -47,6 +75,25 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="DB2024Team03.Main" />
       <module name="Database-Project" />
+=======
+    "git-widget-placeholder": "kebranch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/연가은/Desktop/자바학습/mysql-connector-java-8.0.23.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+>>>>>>> kebranch
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -55,11 +102,19 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="5d824e5b-a5b7-4a90-bd30-ba1ac2dc2a0c" name="Changes" comment="" />
       <created>1716800742199</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716800742199</updated>
+=======
+      <changelist id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="" />
+      <created>1716803378580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716803378580</updated>
+>>>>>>> kebranch
     </task>
     <servers />
   </component>
@@ -74,6 +129,7 @@
       </map>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -84,4 +140,6 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+=======
+>>>>>>> kebranch
 </project>
