@@ -57,6 +57,8 @@ public class Main {
 
 							// 1. 북마크
 							if (myselect == 1) {
+								System.out.println("===========나의 북마크 목록==============");
+								BookmarkController.displayBookmarkList(member.getId());
 
 							}
 
