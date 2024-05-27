@@ -24,7 +24,6 @@ public class OrdersController {
                         rs.getString("name"),
                         rs.getInt("price"),  // Assuming you want to display the price
                         rs.getDate("orderdate"));
-                System.out.println("---------------------------------------------");
             }
 
             System.out.print("[1]리뷰하기 [2]마이페이지로 돌아가기 >> ");
