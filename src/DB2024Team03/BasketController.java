@@ -67,5 +67,21 @@ public class BasketController {
 
     }
 
+    public static void orderItems(int id){
+        String orderItems = "DELETE FROM DB2024_Basket WHERE member_id=?";
+
+        try (
+            Connection conn = DBconnect.getConnection();
+            PreparedStatement statement = conn.prepareStatement(orderItems)
+        ) {
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 }

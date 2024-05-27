@@ -39,7 +39,7 @@ public class Main {
 						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
 						
 						int mainselect = sc.nextInt();
-						////이 밑으로 계속 연결하기!!!
+
 						// 1. 상품목록
 						if (mainselect == 1) {
 							PdlistDTO.displayProductList();
@@ -90,6 +90,7 @@ public class Main {
 							}
 						}
 
+						// 3. 장바구니
 						else if (mainselect == 3){
 							BasketController.showBasketList(member.getId());
 							System.out.print("[1]모두 주문하기 [2]더 쇼핑하기 [3]상품 제거하기 [4]마이페이지 >> ");
@@ -97,15 +98,18 @@ public class Main {
 							int basketselect = sc.nextInt();
 
 							if (basketselect == 1){
-								System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
+								BasketController.orderItems(member.getId());
+
 								//장바구니에 있던 물건들 없애기
 								//재고 줄이기
+
+								System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
+
 							}
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
 								PdlistDTO.displayProductList();
-
 							}
 
 							else if(basketselect == 3){
@@ -113,8 +117,6 @@ public class Main {
 								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
 								int basketId = sc.nextInt();
 								BasketController.deleteBasketItem(member.getId(), basketId);
-
-
 							}
 							else if (basketselect == 4){
 								//마이페이지로 이동
