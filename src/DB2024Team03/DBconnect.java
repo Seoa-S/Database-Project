@@ -6,8 +6,9 @@ public class DBconnect {
 	private static Connection connection = null;
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+
 	static final String DB_URL = "jdbc:mysql://localhost/DB2024Team03";
-	
+
 	static final String USER = "DB2024Team03";
 	static final String PASS = "DB2024Team03";
 

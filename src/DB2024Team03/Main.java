@@ -35,6 +35,35 @@ public class Main {
 						
 						int mainselect = sc.nextInt();
 						////이 밑으로 계속 연결하기!!!
+						// 1. 상품목록
+						if (mainselect == 1) {
+
+						}
+
+						// 2. 마이페이지
+						else if (mainselect == 2) {
+							System.out.println("========================마이페이지=========================");
+							System.out.println(member.getName());
+							System.out.println(member.getAddress());
+							System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지로 이동 >> ");
+
+							int myselect = sc.nextInt();
+
+							// 1. 북마크
+							if (myselect == 1) {
+
+							}
+
+							// 2. 장바구니
+							else if (myselect == 2) {
+
+							}
+
+							// 3. 작성했던 리뷰 목록
+							else if (myselect == 3) {
+
+							}
+						}
 					}
 				}
 			}

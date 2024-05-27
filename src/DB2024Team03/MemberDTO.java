@@ -5,7 +5,7 @@ public class MemberDTO {
 	private String name;
 
 	private String address;
-	
+
 	public MemberDTO(int id, String name, String address) {
 		this.id = id;
 		this.name = name;
