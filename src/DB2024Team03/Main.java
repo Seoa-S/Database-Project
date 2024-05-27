@@ -96,7 +96,7 @@ public class Main {
 							if (basketselect == 1){
 
 								BasketController.updateOrderList(member.getId());//주문내역 업데이트
-								BasketController.orderItems(member.getId()); //장바구니에 있던 물건들 없애기
+								BasketController.removeItems(member.getId()); //장바구니에 있던 물건들 없애기
 								//재고 줄이기
 
 								System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
