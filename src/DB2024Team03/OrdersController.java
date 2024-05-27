@@ -17,14 +17,13 @@ public class OrdersController {
             ResultSet rs = statement.executeQuery();
 
             System.out.println("[주문내역]");
-            System.out.println("상품 ID\\t상품 이름\\t가격\\t주문 날짜:");
+            System.out.println("상품 ID\t상품 이름\t가격\t주문 날짜:");
             while (rs.next()) {
                 System.out.printf("%d\t%s\t%d\t%s%n",
                         rs.getInt("mealkit_id"),
                         rs.getString("name"),
                         rs.getInt("price"),  // Assuming you want to display the price
                         rs.getDate("orderdate"));
-                System.out.println("---------------------------------------------");
             }
 
             System.out.print("[1]리뷰하기 [2]마이페이지로 돌아가기 >> ");
@@ -37,7 +36,7 @@ public class OrdersController {
                 reviewController.displayReview(productId);
                 System.out.println("리뷰를 작성하세요 (엔터를 누르면 작성 완료): ");
                 String reviewContent = sc.nextLine();
-                reviewController.createReview(member_id, productId, reviewContent);
+                reviewController.createReview(member_id, productId, reviewContent, sc);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
