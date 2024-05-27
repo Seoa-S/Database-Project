@@ -1,5 +1,6 @@
 package DB2024Team03;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Main {
@@ -34,7 +35,11 @@ public class Main {
 						int mainselect = sc.nextInt();
 						if (mainselect ==1) {
 							//상품목록
+							PdlistDTO.displayProductList();
 
+						}
+						else if (mainselect==2){
+							break;
 						}
 						////이 밑으로 계속 연결하기!!!
 					}
