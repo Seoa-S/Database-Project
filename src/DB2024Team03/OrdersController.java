@@ -3,7 +3,7 @@ package DB2024Team03;
 import java.sql.*;
 
 public class OrdersController {
-    public static void displayOrdersList(int member_id) throws SQLException {
+    public static void displayOrdersList(int member_id) {
         String ordersquery = "SELECT M.name, M.orderdate" +
                 " FROM DB2024_Orders O INNER JOIN DB2024_Mealkit M ON O.mealkit_id = M.mealkit_id " +
                 "WHERE O.member_id = ?";
@@ -25,9 +25,9 @@ public class OrdersController {
                 System.out.println("---------------------------------------------");
 
 
-            }catch(SQLException e){
-                throw new RuntimeException(e);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

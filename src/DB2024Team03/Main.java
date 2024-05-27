@@ -60,6 +60,8 @@ public class Main {
 								switch (myselect) {
 									case 1:
 										// 북마크
+										System.out.println("================나의 북마크 목록=================");
+										BookmarkController.displayBookmarkList(member.getId());
 										break;
 									case 2:
 										// 장바구니
@@ -73,6 +75,8 @@ public class Main {
 										break;
 									case 4:
 										// 주문 내역
+										System.out.println("================나의 주문내역=================");
+										OrdersController.displayOrdersList(member.getId());
 										// 리뷰 작성을 위한 임시 코드입니다.
 										reviewController = new ReviewController();
 										System.out.print("리뷰를 작성할 주문의 상품 ID를 입력하세요: ");
