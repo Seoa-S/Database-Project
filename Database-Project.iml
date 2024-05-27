@@ -7,6 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="mysql-connector-java-8.0.23" level="project" />
+=======
+>>>>>>> kebranch
   </component>
 </module>
