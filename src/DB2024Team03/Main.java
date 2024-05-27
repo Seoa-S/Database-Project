@@ -70,8 +70,9 @@ public class Main {
 										// 작성했던 리뷰 목록
 										ReviewController reviewController = new ReviewController();
 										reviewController.displayMemberReviews(member.getId());
-										reviewController.promptReturnToMyPage(sc);
-										keepGoing = false;
+										if (reviewController.promptReturnToMyPage(sc)) {
+											keepGoing = true; // Maintain loop in MyPage if user inputs 'y'
+										}
 										break;
 									case 4:
 										// 주문 내역
