@@ -8,13 +8,11 @@ import java.util.Scanner;
 public class ReviewController {
     public List<ReviewDTO> getMemberReviews(int memberId) {
         List<ReviewDTO> reviews = new ArrayList<>();
-<<<<<<< HEAD
+
         String query = "SELECT R.review_id, R.content, R.date, M.name AS product_name " +
                 " FROM Review R INNER JOIN Mealkit M ON R.mealkit_id = M.mealkit_id " +
                 "WHERE R.member_id = ?";
-=======
-        String query = "SELECT * FROM DB2024_Review WHERE member_id = ?";
->>>>>>> seoahb
+
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, memberId);
