@@ -89,12 +89,12 @@ public class BasketController {
 
     }
 
-    public static void orderItems(int id){
-        String orderItems = "DELETE FROM DB2024_Basket WHERE member_id=?";
+    public static void removeItems(int id){
+        String removeItems = "DELETE FROM DB2024_Basket WHERE member_id=?";
 
         try (
             Connection conn = DBconnect.getConnection();
-            PreparedStatement statement = conn.prepareStatement(orderItems)
+            PreparedStatement statement = conn.prepareStatement(removeItems)
         ) {
             statement.setInt(1, id);
 
