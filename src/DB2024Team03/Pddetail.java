@@ -23,7 +23,7 @@ public class Pddetail {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================상품 상세==================");
-            System.out.println("상품번호:\t\t상품이름:\t\t\t가격:\t\t카테고리:\t\t밀키트 설명:\t\t\t\t\t\t\t\t\t재고량:\t북마크 수:");
+            System.out.println("상품번호:\t\t상품이름:\t\t\t가격:\t\t카테고리:\t\t밀키트 설명:\t\t\t\t\t\t\t\t\t 재고량:\t북마크 수:");
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("mealkit_id");
