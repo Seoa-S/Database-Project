@@ -36,7 +36,7 @@ public class Main {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
-						System.out.println("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
+						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
 						
 						int mainselect = sc.nextInt();
 						////이 밑으로 계속 연결하기!!!
@@ -48,28 +48,45 @@ public class Main {
 
 						// 2. 마이페이지
 						else if (mainselect == 2) {
-							System.out.println("========================마이페이지=========================");
-							System.out.println(member.getName());
-							System.out.println(member.getAddress());
-							System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지로 이동 >> ");
+							boolean keepGoing = true;
+							while (keepGoing) {
+								System.out.println("========================마이페이지=========================");
+								System.out.println(member.getName());
+								System.out.println(member.getAddress());
+								System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지로 이동 >> ");
 
-							int myselect = sc.nextInt();
+								int myselect = sc.nextInt();
 
-							// 1. 북마크
-							if (myselect == 1) {
-								System.out.println("===========나의 북마크 목록==============");
-								BookmarkController.displayBookmarkList(member.getId());
-
-							}
-
-							// 2. 장바구니
-							else if (myselect == 2) {
-
-							}
-
-							// 3. 작성했던 리뷰 목록
-							else if (myselect == 3) {
-
+								switch (myselect) {
+									case 1:
+										// 북마크
+										break;
+									case 2:
+										// 장바구니
+										break;
+									case 3:
+										// 작성했던 리뷰 목록
+										ReviewController reviewController = new ReviewController();
+										reviewController.displayMemberReviews(member.getId());
+										reviewController.promptReturnToMyPage(sc);
+										keepGoing = false;
+										break;
+									case 4:
+										// 주문 내역
+										// 리뷰 작성을 위한 임시 코드입니다.
+										reviewController = new ReviewController();
+										System.out.print("리뷰를 작성할 주문의 상품 ID를 입력하세요: ");
+										int productId = sc.nextInt();
+										sc.nextLine(); // consume the leftover newline
+										reviewController.displayReview(productId);
+										System.out.println("리뷰를 작성하세요 (엔터를 누르면 작성 완료):");
+										String reviewContent = sc.nextLine();
+										reviewController.createReview(member.getId(), productId, reviewContent);
+										break;
+									case 5:
+										keepGoing = false; // Exit 마이페이지 loop
+										break;
+								}
 							}
 						}
 

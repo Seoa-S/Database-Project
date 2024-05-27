@@ -8,9 +8,8 @@ import java.util.Scanner;
 public class ReviewController {
     public List<ReviewDTO> getMemberReviews(int memberId) {
         List<ReviewDTO> reviews = new ArrayList<>();
-
         String query = "SELECT R.review_id, R.content, R.date, M.name AS product_name " +
-                " FROM DB2024_Review R INNER JOIN  DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
+                " FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
                 "WHERE R.member_id = ?";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -51,4 +50,39 @@ public class ReviewController {
         }
     }
 
+    public void displayReview(int mealkitId) {
+        String query = "SELECT name, price, stock FROM DB2024_Mealkit WHERE mealkit_id = ?";
+        try (Connection conn = DBconnect.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, mealkitId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("상품 이름: " + rs.getString("name"));
+                System.out.println("가격: " + rs.getInt("price"));
+                System.out.println("재고: " + rs.getInt("stock"));
+            } else {
+                System.out.println("해당 상품이 존재하지 않습니다.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createReview(int memberId, int mealkitId, String content) {
+        String query = "INSERT INTO Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
+        try (Connection conn = DBconnect.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, content);
+            pstmt.setInt(2, mealkitId);
+            pstmt.setInt(3, memberId);
+            int result = pstmt.executeUpdate();
+            if (result > 0) {
+                System.out.println("리뷰가 성공적으로 등록되었습니다.");
+            } else {
+                System.out.println("리뷰 등록에 실패했습니다.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
