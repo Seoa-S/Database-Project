@@ -4,96 +4,62 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="5d824e5b-a5b7-4a90-bd30-ba1ac2dc2a0c" name="Changes" comment="" />
-=======
-    <list default="true" id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Database-Project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_232.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" afterDir="false" />
+    <list default="true" id="a09939ff-a09f-469a-811f-2925fea43d9c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/OrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/OrdersController.java" afterDir="false" />
     </list>
->>>>>>> kebranch
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-<<<<<<< HEAD
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2h2mqwj2dw1A6VJzehUYbDHOm1x" />
-=======
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;kaeun0813&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Seoa-S/Database-Project.git&quot;,
-    &quot;accountId&quot;: &quot;c94532ac-42ff-458b-8b80-52a6d6b74abd&quot;
-  }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2h2sCOU5X1rAczC2jRez6FUhVZu" />
->>>>>>> kebranch
+
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2h3oc8R2kzNZiig42EwgNXfnx45" />
+
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-<<<<<<< HEAD
-    "git-widget-placeholder": "jeesoo",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/kimjeesoo/ewha/3-1/데이터베이스/Database-Project/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
-  }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/jdk-11.0.14.jdk/Contents/Home" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="DB2024Team03.Main" />
-      <module name="Database-Project" />
-=======
-    "git-widget-placeholder": "kebranch",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/연가은/Desktop/자바학습/mysql-connector-java-8.0.23.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
+    "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
->>>>>>> kebranch
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a09939ff-a09f-469a-811f-2925fea43d9c" name="Changes" comment="" />
+      <created>1716832198692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716832198692</updated>
+      <workItem from="1716832199932" duration="890000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,19 +68,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-<<<<<<< HEAD
       <changelist id="5d824e5b-a5b7-4a90-bd30-ba1ac2dc2a0c" name="Changes" comment="" />
       <created>1716800742199</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716800742199</updated>
-=======
-      <changelist id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="" />
-      <created>1716803378580</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1716803378580</updated>
->>>>>>> kebranch
     </task>
     <servers />
   </component>
@@ -129,17 +87,5 @@
       </map>
     </option>
   </component>
-<<<<<<< HEAD
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.sql.SQLSyntaxErrorException" package="java.sql" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-=======
->>>>>>> kebranch
+</component>
 </project>
