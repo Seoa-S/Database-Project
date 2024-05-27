@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class PdlistDTO{
     public static void displayProductList() {
-        String query = "SELECT * FROM Mealkit";
+        String query = "SELECT * FROM DB2024_Mealkit";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
