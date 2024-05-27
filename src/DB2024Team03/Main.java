@@ -43,16 +43,7 @@ public class Main {
 						// 1. 상품목록
 						if (mainselect == 1) {
 							Pdlistcontroller.displayProductList();
-							/*System.out.print("[1]상품상세 [2]메인페이지 >> ");
-							int mselect =sc.nextInt();
-							//상품상세
-							if (mselect==1){
-								Pddetail.displayProductdetail();
-							}
-							//메인페이지로 이동
-							else if (mselect==2) {
-								break;
-							}else System.out.println("올바르지 않은 입력입니다.");*/
+
 						}
 
 						// 2. 마이페이지

@@ -12,11 +12,11 @@ public class Pddetail {
         System.out.print("상품 id를 입력하세요: ");
         int PDid = sc.nextInt();
         //상품상세
-        String query = "SELECT Mealkit.mealkit_id, Mealkit.name, Mealkit.price, Mealkit.category, Mealkit.info, Mealkit.stock, COUNT(Bookmark.mealkit_id) AS bookmarknum " +
-                "FROM Mealkit LEFT JOIN Bookmark ON Mealkit.mealkit_id = Bookmark.mealkit_id " +
-                "WHERE Mealkit.mealkit_id = ? GROUP BY Mealkit.mealkit_id";
+        String query = "SELECT M.mealkit_id, M.name, M.price, M.category, M.info, M.stock, COUNT(B.mealkit_id) AS bookmarknum " +
+                "FROM DB2024_Mealkit M LEFT JOIN DB2024_Bookmark B ON M.mealkit_id = B.mealkit_id " +
+                "WHERE M.mealkit_id = ? GROUP BY M.mealkit_id";
         //해당리뷰목록
-        //String query2=
+        //String query2="SELE
 
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
