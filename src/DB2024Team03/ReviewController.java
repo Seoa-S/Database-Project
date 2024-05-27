@@ -69,7 +69,7 @@ public class ReviewController {
     }
 
     public void createReview(int memberId, int mealkitId, String content) {
-        String query = "INSERT INTO Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
+        String query = "INSERT INTO DB2024_Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, content);
@@ -82,7 +82,7 @@ public class ReviewController {
                 System.out.println("리뷰 등록에 실패했습니다.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Prints the stack trace for debugging
         }
     }
 }

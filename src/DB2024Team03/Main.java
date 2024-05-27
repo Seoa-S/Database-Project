@@ -76,16 +76,7 @@ public class Main {
 									case 4:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
-										OrdersController.displayOrdersList(member.getId());
-										// 리뷰 작성을 위한 임시 코드입니다.
-										reviewController = new ReviewController();
-										System.out.print("리뷰를 작성할 주문의 상품 ID를 입력하세요: ");
-										int productId = sc.nextInt();
-										sc.nextLine(); // consume the leftover newline
-										reviewController.displayReview(productId);
-										System.out.println("리뷰를 작성하세요 (엔터를 누르면 작성 완료):");
-										String reviewContent = sc.nextLine();
-										reviewController.createReview(member.getId(), productId, reviewContent);
+										OrdersController.displayOrdersList(member.getId(), sc);
 										break;
 									case 5:
 										keepGoing = false; // Exit 마이페이지 loop
