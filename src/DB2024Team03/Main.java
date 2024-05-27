@@ -1,6 +1,7 @@
 package DB2024Team03;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Main {
@@ -37,6 +38,7 @@ public class Main {
 						////이 밑으로 계속 연결하기!!!
 						// 1. 상품목록
 						if (mainselect == 1) {
+							PdlistDTO.displayProductList();
 
 						}
 
