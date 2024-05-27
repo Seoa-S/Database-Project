@@ -6,7 +6,7 @@ public class MemberController {
 
 	//로그인 기능 - 로그인 성공시 회원id(member_id) 리턴
 	public MemberDTO login(String id, String pw) {
-        String loginquery = "SELECT member_id AS id FROM Member WHERE id = ? AND password = ?";
+        String loginquery = "SELECT member_id, member_name, address FROM Member WHERE id = ? AND password = ?";
 
         try (
         	//미리 만들어준 db와 연결하는 코드 불러오기
@@ -20,7 +20,10 @@ public class MemberController {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     System.out.println("로그인 성공");
-                    return new MemberDTO(resultSet.getInt("id"));	//쿼리 성공하면 로그인한 회원의 id return
+					int member_id = resultSet.getInt("member_id");
+					String member_name = resultSet.getString("member_name");
+					String address = resultSet.getString("address");
+                    return new MemberDTO(member_id, member_name, address);	//쿼리 성공하면 로그인한 회원의 id return
                 } else {
                     System.out.println("일치하는 아이디 혹은 비밀번호가 없습니다.");
                     return null;
