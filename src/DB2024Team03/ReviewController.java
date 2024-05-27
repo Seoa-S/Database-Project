@@ -39,7 +39,7 @@ public class ReviewController {
         }
     }
 
-    public void promptReturnToMyPage(Scanner sc) {
+    public boolean promptReturnToMyPage(Scanner sc) {
         System.out.print("마이페이지로 돌아가시겠습니까? (y) >> ");
         sc.nextLine(); // Clear the buffer after reading an integer
         String back = sc.nextLine();
@@ -48,6 +48,7 @@ public class ReviewController {
             System.out.print("마이페이지로 돌아가시겠습니까? (y) >> ");
             back = sc.nextLine();
         }
+        return true;
     }
 
     public void displayReview(int mealkitId) {
@@ -68,7 +69,7 @@ public class ReviewController {
         }
     }
 
-    public void createReview(int memberId, int mealkitId, String content) {
+    public void createReview(int memberId, int mealkitId, String content, Scanner sc) {
         String query = "INSERT INTO DB2024_Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -78,6 +79,7 @@ public class ReviewController {
             int result = pstmt.executeUpdate();
             if (result > 0) {
                 System.out.println("리뷰가 성공적으로 등록되었습니다.");
+                promptReturnToMyPage(sc);
             } else {
                 System.out.println("리뷰 등록에 실패했습니다.");
             }
