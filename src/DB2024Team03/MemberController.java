@@ -6,7 +6,7 @@ public class MemberController {
 
 	//로그인 기능 - 로그인 성공시 회원id(member_id) 리턴
 	public MemberDTO login(String id, String pw) {
-		String loginquery = "SELECT member_id, member_name, address FROM Member WHERE id = ? AND password = ?";
+        String loginquery = "SELECT member_id, member_name, address FROM Member WHERE id = ? AND password = ?";
 
 		try (
 				//미리 만들어준 db와 연결하는 코드 불러오기
@@ -35,7 +35,6 @@ public class MemberController {
 			return null;
 		}
 	}
-
 
 	public void signup(String id, String pw, String name, String address) {
 		String maxIdQuery = "SELECT MAX(member_id) AS id FROM Member";

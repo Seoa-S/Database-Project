@@ -1,6 +1,7 @@
 package DB2024Team03;
 
 import java.util.List;
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
@@ -110,7 +111,10 @@ public class Main {
 				MemberController signupcon = new MemberController();
 				signupcon.signup(id, pw, name, addr);
 			}
-			else if(select == 3) break;
+			else if(select == 3) {
+				DBconnect.closeConnection();
+				break;
+			}
 			else System.out.println("올바르지 않은 입력입니다.");
 		}
 	}
