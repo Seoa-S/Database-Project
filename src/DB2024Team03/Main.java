@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import static DB2024Team03.BasketController.deleteBasketItem;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -71,6 +73,36 @@ public class Main {
 
 						else if (mainselect == 3){
 							BasketController.showBasketList(member.getId());
+							System.out.print("[1]모두 주문하기 [2]더 쇼핑하기 [3]상품 제거하기 [4]마이페이지 >> ");
+
+							int basketselect = sc.nextInt();
+
+							if (basketselect == 1){
+								System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
+								//장바구니에 있던 물건들 없애기
+								//재고 줄이기
+							}
+
+							else if(basketselect == 2){
+								//상품 리스트 화면으로 넘어가기
+								PdlistDTO.displayProductList();
+
+							}
+
+							else if(basketselect == 3){
+								//제거하고 싶은 상품 basketId 입력받기
+								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+								int basketId = sc.nextInt();
+								BasketController.deleteBasketItem(member.getId(), basketId);
+
+
+							}
+							else if (basketselect == 4){
+								//마이페이지로 이동
+							}
+							else
+								System.out.println("잘못 입력하셨습니다.");
+
 						}
 					}
 				}
