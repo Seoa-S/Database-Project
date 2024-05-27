@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
-import static DB2024Team03.BasketController.deleteBasket;
+import static DB2024Team03.BasketController.deleteBasketItem;
 
 public class Main {
 
@@ -88,11 +88,11 @@ public class Main {
 							}
 
 							else if(basketselect == 3){
-								BasketController.deleteBasket();
-								//제거하고 싶은 상품 id 입력받기
-								//입력된 상품 제거하기
-								//업데이트된 장바구니 리스트 보여주기
-								//다시 메뉴 보여주기
+								//제거하고 싶은 상품 basketId 입력받기
+								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+								int basketId = sc.nextInt();
+								BasketController.deleteBasketItem(member.getId(), basketId);
+
 
 							}
 							else if (basketselect == 4){
