@@ -76,5 +76,25 @@ public class MemberController {
 			System.out.println("데이터베이스 오류가 발생했습니다.");
 		}
 	}
-	
+
+	public boolean MemberDuplicate(String id){
+		//해당 id를 가진 member가 존재하는지 확인하는 코드
+		String idCheckquery = "SELECT * FROM Member WHERE id = ?";
+
+		try(
+				//db와 연결
+				Connection conn = DBconnect.getConnection();
+				PreparedStatement statement = conn.prepareStatement(idCheckquery)
+		) {
+			statement.setString(1, id);
+
+			try(ResultSet resultSet = statement.executeQuery()){
+				return resultSet.next();	//회원이 존재하면 true, 없으면 false
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("데이터베이스 오류가 발생했습니다.");
+			return false;
+		}
+	}
 }

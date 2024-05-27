@@ -15,7 +15,6 @@ public class DBconnect {
 		if (connection == null || connection.isClosed()) {
 			try {
 				connection = DriverManager.getConnection(DB_URL, USER, PASS);
-				System.out.println("데이터베이스 연결 성공");
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.out.println("데이터베이스 연결 실패");

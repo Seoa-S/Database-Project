@@ -1,12 +1,12 @@
 package DB2024Team03;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		MemberController con = new MemberController();
 		MemberDTO member;
 		
 		while(true) {
@@ -22,9 +22,9 @@ public class Main {
 				String id = sc.nextLine();
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
-				
-				MemberController logincon = new MemberController();
-				member = logincon.login(id, pw);
+
+				//memberDTO에 현재 로그인한 회원정보 넣기
+				member = con.login(id, pw);
 				
 				//로그인 성공
 				if(member != null) {
@@ -41,18 +41,27 @@ public class Main {
 			else if(select == 2) {
 				//회원가입
 				sc.nextLine();
-				System.out.print("아이디 : ");
-				String id = sc.nextLine();
+				String id;
+				while(true){
+					System.out.print("아이디 : ");
+					id = sc.nextLine();
+					//중복되는 회원이 있는지 확인
+					if(!con.MemberDuplicate(id)){
+						//중복되는 회원이 없다면
+						System.out.println("사용 가능한 아이디입니다.");
+						break;
+					} else{
+						System.out.println("이미 존재하는 id입니다.");
+					}
+				}
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
-				//TODO : 회원 중복확인
 				System.out.print("본인이름 : ");
 				String name = sc.nextLine();
 				System.out.print("주소 : ");
 				String addr = sc.nextLine();
-				
-				MemberController signupcon = new MemberController();
-				signupcon.signup(id, pw, name, addr);
+
+				con.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {
 				DBconnect.closeConnection();
