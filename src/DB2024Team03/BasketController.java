@@ -54,7 +54,6 @@ public class BasketController {
             try {
                 statement.executeUpdate();
 
-                //입력된 상품 제거하기
                 System.out.print("상품이 제거되었습니다.");
                 return;
             } catch (SQLException e) {
@@ -64,6 +63,52 @@ public class BasketController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    public static void updateOrderList(int id){
+        String updateOrderList = "DELETE FROM DB2024_Basket WHERE member_id=?";
+
+        try (
+                Connection conn = DBconnect.getConnection();
+                PreparedStatement statement = conn.prepareStatement(updateOrderList)
+        ) {
+            statement.setInt(1, id);
+
+            try{
+
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public static void orderItems(int id){
+        String orderItems = "DELETE FROM DB2024_Basket WHERE member_id=?";
+
+        try (
+            Connection conn = DBconnect.getConnection();
+            PreparedStatement statement = conn.prepareStatement(orderItems)
+        ) {
+            statement.setInt(1, id);
+
+            try{
+
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
