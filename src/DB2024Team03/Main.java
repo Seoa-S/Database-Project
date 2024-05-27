@@ -89,7 +89,7 @@ public class Main {
 						// 3. 장바구니
 						else if (mainselect == 3){
 							BasketController.showBasketList(member.getId());
-							System.out.print("[1]모두 주문하기 [2]더 쇼핑하기 [3]상품 제거하기 [4]마이페이지 >> ");
+							System.out.print("[1]모두 주문하기 [2]더 쇼핑하기 [3]상품 제거하기 [4]메인페이지 >> ");
 
 							int basketselect = sc.nextInt();
 
@@ -116,7 +116,8 @@ public class Main {
 								BasketController.deleteBasketItem(member.getId(), basketId);
 							}
 							else if (basketselect == 4){
-								//마이페이지로 이동
+								//메인페이지로 이동
+								continue;
 							}
 							else
 								System.out.println("잘못 입력하셨습니다.");
