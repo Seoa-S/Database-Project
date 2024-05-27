@@ -104,7 +104,7 @@ public class Main {
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
-								PdlistDTO.displayProductList();
+								Pdlistcontroller.displayProductList();
 
 							}
 
