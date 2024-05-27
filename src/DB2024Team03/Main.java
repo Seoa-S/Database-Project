@@ -32,6 +32,10 @@ public class Main {
 						System.out.println("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
 						
 						int mainselect = sc.nextInt();
+						if (mainselect ==1) {
+							//상품목록
+
+						}
 						////이 밑으로 계속 연결하기!!!
 					}
 				}
