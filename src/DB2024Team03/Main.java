@@ -32,14 +32,23 @@ public class Main {
 					while(true) {
 						System.out.println(member.getName() + "님 환영합니다!");
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
-						System.out.println("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
+						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
 						
 						int mainselect = sc.nextInt();
 						////이 밑으로 계속 연결하기!!!
 						// 1. 상품목록
 						if (mainselect == 1) {
-							PdlistDTO.displayProductList();
-
+							Pdlistcontroller.displayProductList();
+							/*System.out.print("[1]상품상세 [2]메인페이지 >> ");
+							int mselect =sc.nextInt();
+							//상품상세
+							if (mselect==1){
+								Pddetail.displayProductdetail();
+							}
+							//메인페이지로 이동
+							else if (mselect==2) {
+								break;
+							}else System.out.println("올바르지 않은 입력입니다.");*/
 						}
 
 						// 2. 마이페이지
