@@ -1,5 +1,6 @@
 package DB2024Team03;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import static DB2024Team03.BasketController.deleteBasketItem;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		Scanner sc = new Scanner(System.in);
 		MemberController con = new MemberController();
 		MemberDTO member;
@@ -109,11 +110,30 @@ public class Main {
 
 							if (basketselect == 1){
 
-								BasketController.updateOrderList(member.getId());//주문내역 업데이트
-								BasketController.removeItems(member.getId()); //장바구니에 있던 물건들 없애기
-								BasketController.stockUpdate(member.getId());//재고 줄이기
+								Connection conn = null;
+								try {
+									conn = DBconnect.getConnection();
+									conn.setAutoCommit(false);
 
-								System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
+									BasketController.updateOrderList(member.getId(), conn);//주문내역 업데이트
+									BasketController.removeItems(member.getId(), conn); //장바구니에 있던 물건들 없애기
+									BasketController.stockUpdate(member.getId(), conn);//재고 줄이기
+
+									conn.commit();
+									System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
+
+								} catch (SQLException e) {
+                                    //throw new RuntimeException(e);
+									if (conn != null){
+										conn.rollback();
+									}
+									e.printStackTrace();
+                                } finally {
+									if(conn != null){
+										conn.close();
+									}
+								}
+
 
 							}
 

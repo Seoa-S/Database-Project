@@ -66,15 +66,15 @@ public class BasketController {
 
     }
 
-    public static void updateOrderList(int id){
-        String updateOrderList = "INSERT INTO DB2024_Orders (mealkit_id, member_id, orderdate)" +
-                "SELECT B.mealkit_id, B.member_id, CURRENT_DATE() AS orderdate" +
-                "FROM DB2024_Basket B" +
-                "JOIN DB2024_Mealkit M ON B.mealkit_id = M.mealkit_id" +
-                "WHERE B.member_id = ? AND M.stock > 0";
+    public static void updateOrderList(int id, Connection conn){
+        String updateOrderList = "INSERT INTO DB2024_Orders (mealkit_id, member_id, orderdate) " +
+                "SELECT B.mealkit_id, B.member_id, CURRENT_DATE() AS orderdate " +
+                "FROM DB2024_Basket B " +
+                "JOIN DB2024_Mealkit M ON B.mealkit_id = M.mealkit_id " +
+                "WHERE B.member_id = ? AND M.stock > 0 ";
 
         try (
-                Connection conn = DBconnect.getConnection();
+                //Connection conn = DBconnect.getConnection();
                 PreparedStatement statement = conn.prepareStatement(updateOrderList)
         ) {
             statement.setInt(1, id);
@@ -93,15 +93,15 @@ public class BasketController {
 
     }
 
-    public static void removeItems(int id){
-        String removeItems = "DELETE FROM DB2024_Basket" +
+    public static void removeItems(int id, Connection conn){
+        String removeItems = "DELETE FROM DB2024_Basket " +
                 "WHERE member_id = ? AND mealkit_id IN (" +
                 "    SELECT mealkit_id" +
                 "    FROM DB2024_Mealkit" +
                 "    WHERE stock > 0)";
 
         try (
-            Connection conn = DBconnect.getConnection();
+            //Connection conn = DBconnect.getConnection();
             PreparedStatement statement = conn.prepareStatement(removeItems)
         ) {
             statement.setInt(1, id);
@@ -120,14 +120,14 @@ public class BasketController {
 
     }
 
-    public static void stockUpdate(int id){
-        String stockUpdate = "UPDATE DB2024_Mealkit M" +
-                "INNER JOIN DB2024_Basket B ON M.mealkit_id = B.mealkit_id" +
-                "SET M.stock = M.stock - 1" +
+    public static void stockUpdate(int id, Connection conn){
+        String stockUpdate = "UPDATE DB2024_Mealkit M " +
+                "INNER JOIN DB2024_Basket B ON M.mealkit_id = B.mealkit_id " +
+                "SET M.stock = M.stock - 1 " +
                 "WHERE B.member_id = ? AND stock >= 0";
 
         try (
-                Connection conn = DBconnect.getConnection();
+                //Connection conn = DBconnect.getConnection();
                 PreparedStatement statement = conn.prepareStatement(stockUpdate)
         ) {
             statement.setInt(1, id);
