@@ -42,7 +42,7 @@ public class Main {
 
 						// 1. 상품목록
 						if (mainselect == 1) {
-							Pdlistcontroller.displayProductList();
+							Pdlistcontroller.displayProductList(member.getId());
 
 						}
 
@@ -119,7 +119,7 @@ public class Main {
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
-								Pdlistcontroller.displayProductList();
+								Pdlistcontroller.displayProductList(member.getId());
 
 							}
 

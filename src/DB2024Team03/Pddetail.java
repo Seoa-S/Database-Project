@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Pddetail {
-    private static int memberId = 1; // 현재 로그인한 사용자 ID (임시로 설정)
 
-    public static void displayProductdetail() {
+    public static void displayProductdetail(int memberId) {
         Scanner sc = new Scanner(System.in);
         System.out.print("상품 id를 입력하세요: ");
         int PDid = sc.nextInt();
@@ -50,31 +49,30 @@ public class Pddetail {
                     sc.nextLine(); // 버퍼 비우기
                     String confirm = sc.nextLine();
                     if ("y".equalsIgnoreCase(confirm)) {
-                        addToBasket(PDid);
+                        addToBasket(PDid, memberId);
                     } else {
                         System.out.println("상품 목록으로 돌아갑니다.");
-                        // 여기에 상품 목록으로 돌아가는 코드
-                        Pdlistcontroller.displayProductList();
+                        // 상품 목록으로 돌아가는 코드
+                        Pdlistcontroller.displayProductList(memberId);
                     }
-                } //북마크
+                } // 북마크
                 else if (mselect == 2) {
                     System.out.print("북마크에 추가하시겠습니까? (y): ");
                     sc.nextLine(); // 버퍼 비우기
                     String confirm = sc.nextLine();
                     if ("y".equalsIgnoreCase(confirm)) {
-                        addToBookmark(PDid);
+                        addToBookmark(PDid, memberId);
                     } else {
                         System.out.println("마이페이지로 돌아갑니다.");
-                        // 여기에 마이페이지로 돌아가는 코드를 추가
-                        // 예: MyPage.display();
+
                     }
-                } //리뷰목록
+                } // 리뷰목록
                 else if (mselect == 3) {
                     displayReviews(PDid);
-                } //상품목록으로 돌아가기
+                } // 상품목록으로 돌아가기
                 else if (mselect == 4) {
-                    Pdlistcontroller.displayProductList();
-                } //1~4를 입력하지 않았을 때 출력 후 메인페이지로 돌아감
+                    Pdlistcontroller.displayProductList(memberId);
+                } // 1~4를 입력하지 않았을 때 출력 후 메인페이지로 돌아감
                 else {
                     System.out.println("올바르지 않은 입력입니다.");
                 }
@@ -115,7 +113,7 @@ public class Pddetail {
     }
 
     // 장바구니에 상품 추가하는 메서드
-    private static void addToBasket(int PDid) {
+    private static void addToBasket(int PDid, int memberId) {
         String query = "INSERT INTO DB2024_Basket (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection();
@@ -135,7 +133,8 @@ public class Pddetail {
             e.printStackTrace();
         }
     }
-    private static void addToBookmark(int PDid) {
+
+    private static void addToBookmark(int PDid, int memberId) {
         String query = "INSERT INTO DB2024_Bookmark (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection();
@@ -155,5 +154,4 @@ public class Pddetail {
             e.printStackTrace();
         }
     }
-
 }
