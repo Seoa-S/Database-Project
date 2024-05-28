@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Pdlistcontroller{
-    public static void displayProductList() {
+    public static void displayProductList(int memberId) {
         String query = "SELECT * FROM ProductWithBookmark_view";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
@@ -27,7 +27,7 @@ public class Pdlistcontroller{
             int mselect =sc.nextInt();
             //상품상세
             if (mselect==1){
-                Pddetail.displayProductdetail();
+                Pddetail.displayProductdetail(memberId);
             }
             //메인페이지로 이동
             else if (mselect==2) {

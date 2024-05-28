@@ -43,7 +43,7 @@ public class Main {
 
 						// 1. 상품목록
 						if (mainselect == 1) {
-							Pdlistcontroller.displayProductList();
+							Pdlistcontroller.displayProductList(member.getId());
 
 						}
 
@@ -63,6 +63,20 @@ public class Main {
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
 										BookmarkController.displayBookmarkList(member.getId());
+										System.out.print("[1]북마크 제거 [2]메인페이지 >> ");
+
+										int bookmarkselect = sc.nextInt();
+
+										if (bookmarkselect == 1){
+											System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+											int BookmarkId = sc.nextInt();
+											BookmarkController.deleteBookmarkItem(member.getId(), BookmarkId);
+										}
+										else if(bookmarkselect == 2){
+											continue;
+										}
+										else System.out.println("잘못 입력하셨습니다.");
+
 										break;
 									case 2:
 										// 장바구니
@@ -125,7 +139,7 @@ public class Main {
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
-								Pdlistcontroller.displayProductList();
+								Pdlistcontroller.displayProductList(member.getId());
 
 							}
 

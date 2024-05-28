@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="5f7f9af8-2390-47a0-911f-fcdad240da92" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/out/production/Database-Project/.idea/libraries/mysql_connector_java_8_0_23.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Database-Project/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/.idea/misc.xml" afterDir="false" />
@@ -19,6 +20,21 @@
       <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Pdlistcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Pdlistcontroller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/ReviewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/ReviewDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/ReviewDTO.class" afterDir="false" />
+=======
+    <list default="true" id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="save">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Pddetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Pdlistcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Pdlistcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BasketController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BasketController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BookmarkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BookmarkController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/OrdersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/OrdersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Pddetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Pdlistcontroller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/ReviewController.class" beforeDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

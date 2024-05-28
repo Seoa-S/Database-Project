@@ -33,7 +33,7 @@ public class ReviewController {
         } else {
             System.out.print("=====================작성했던 리뷰 목록======================");
             for (ReviewDTO review : reviews) {
-                System.out.println("상품이름:" + review.getProductName());
+                System.out.println("\n상품이름:" + review.getProductName());
                 System.out.println("리뷰내용:" + review.getContent());
                 System.out.println("작성날짜:" + review.getDate().toString());
             }
