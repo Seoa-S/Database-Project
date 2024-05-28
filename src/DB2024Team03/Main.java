@@ -36,7 +36,7 @@ public class Main {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
-						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]북마크 >> ");
+						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 >> ");
 						
 						int mainselect = sc.nextInt();
 
@@ -53,7 +53,7 @@ public class Main {
 								System.out.println("========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
-								System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지로 이동 >> ");
+								System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지 >> ");
 
 								int myselect = sc.nextInt();
 
