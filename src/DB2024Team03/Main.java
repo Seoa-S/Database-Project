@@ -62,6 +62,20 @@ public class Main {
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
 										BookmarkController.displayBookmarkList(member.getId());
+										System.out.print("[1]북마크 제거 [2]메인페이지 >> ");
+
+										int bookmarkselect = sc.nextInt();
+
+										if (bookmarkselect == 1){
+											System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+											int BookmarkId = sc.nextInt();
+											BookmarkController.deleteBookmarkItem(member.getId(), BookmarkId);
+										}
+										else if(bookmarkselect == 2){
+											continue;
+										}
+										else System.out.println("잘못 입력하셨습니다.");
+
 										break;
 									case 2:
 										// 장바구니
