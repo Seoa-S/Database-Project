@@ -27,7 +27,7 @@ public class Pddetail {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================상품 상세==================");
-            System.out.println("상품번호:\t\t상품이름:\t\t\t가격:\t\t카테고리:\t\t밀키트 설명:\t\t\t\t\t\t\t\t\t 재고량:\t북마크 수:");
+            System.out.println("상품번호:\t\t상품이름:\t\t\t가격:\t\t카테고리:\t\t밀키트 설명:\t\t\t\t\t\t\t\t\t재고량:\t북마크 수:");
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     int id = rs.getInt("mealkit_id");
@@ -55,7 +55,7 @@ public class Pddetail {
                         // 상품 목록으로 돌아가는 코드
                         Pdlistcontroller.displayProductList(memberId);
                     }
-                } // 북마크
+                } // 북마크에 추가
                 else if (mselect == 2) {
                     System.out.print("북마크에 추가하시겠습니까? (y): ");
                     sc.nextLine(); // 버퍼 비우기
@@ -100,10 +100,11 @@ public class Pddetail {
                     String content = rs.getString("content");
                     String date = rs.getString("date");
                     int member_id = rs.getInt("member_id");
-                    System.out.println("\n상품이름:" + productName);
+                    System.out.println("상품이름:" + productName);
                     System.out.println("리뷰내용:" + content);
                     System.out.println("작성날짜:" + date);
                     System.out.println("작성자 id:" + member_id);
+                    System.out.println();
                 }
             }
 
