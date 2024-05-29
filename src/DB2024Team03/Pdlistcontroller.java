@@ -25,7 +25,7 @@ public class Pdlistcontroller{
             System.out.print("[1]상품상세 [2]메인페이지 >> ");
             Scanner sc = new Scanner(System.in);
             int mselect =sc.nextInt();
-            //상품상세
+            //상품 상세로 이동
             if (mselect==1){
                 Pddetail.displayProductdetail(memberId);
             }
