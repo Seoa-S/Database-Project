@@ -33,9 +33,9 @@ public class ReviewController {
         } else {
             System.out.print("=====================작성했던 리뷰 목록======================");
             for (ReviewDTO review : reviews) {
-                System.out.println("\n상품이름:" + review.getProductName());
-                System.out.println("리뷰내용:" + review.getContent());
-                System.out.println("작성날짜:" + review.getDate().toString());
+                System.out.println("\n[상품이름]" + review.getProductName());
+                System.out.println("[리뷰내용]" + review.getContent());
+                System.out.println("[작성날짜]" + review.getDate().toString());
             }
             System.out.println("=====================");
         }
@@ -60,9 +60,9 @@ public class ReviewController {
             pstmt.setInt(1, mealkitId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                System.out.println("상품 이름: " + rs.getString("name"));
-                System.out.println("가격: " + rs.getInt("price"));
-                System.out.println("재고: " + rs.getInt("stock"));
+                System.out.println("[상품 이름] " + rs.getString("name"));
+                System.out.println("[가격] " + rs.getInt("price"));
+                System.out.println("[재고] " + rs.getInt("stock"));
             } else {
                 System.out.println("해당 상품이 존재하지 않습니다.");
             }

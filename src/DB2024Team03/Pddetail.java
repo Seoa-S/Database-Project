@@ -18,16 +18,16 @@ public class Pddetail {
                 "WHERE M.mealkit_id = ? GROUP BY M.mealkit_id";
 
         // 해당리뷰목록 쿼리
-        String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
+        /*String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
                 "FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
-                "WHERE R.mealkit_id = ?";
+                "WHERE R.mealkit_id = ?";*/
 
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query1)) {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================상품 상세==================");
-            System.out.println("상품번호:\t\t상품이름:\t\t\t가격:\t\t카테고리:\t\t밀키트 설명:\t\t\t\t\t\t\t\t\t재고량:\t북마크 수:");
+            System.out.println("[상품번호]\t\t[상품이름]\t\t\t[가격]\t\t[카테고리]\t\t[밀키트 설명]\t\t\t\t\t\t\t\t\t[재고량]\t[북마크 수]");
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     int id = rs.getInt("mealkit_id");
@@ -100,10 +100,10 @@ public class Pddetail {
                     String content = rs.getString("content");
                     String date = rs.getString("date");
                     int member_id = rs.getInt("member_id");
-                    System.out.println("상품이름:" + productName);
-                    System.out.println("리뷰내용:" + content);
-                    System.out.println("작성날짜:" + date);
-                    System.out.println("작성자 id:" + member_id);
+                    System.out.println("[상품이름]" + productName);
+                    System.out.println("[리뷰내용]" + content);
+                    System.out.println("[작성날짜]" + date);
+                    System.out.println("[작성자 id]" + member_id);
                     System.out.println();
                 }
             }

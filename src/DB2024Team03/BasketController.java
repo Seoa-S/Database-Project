@@ -9,7 +9,10 @@ import java.util.Scanner;
 public class BasketController {
 
     public static void showBasketList(int id) {
-        String basketlist = "SELECT mealkit_id, name, price, category From DB2024_Mealkit, DB2024_Basket WHERE DB2024_Basket.mealkit_id=DB2024_Mealkit.mealkit_id AND DB2024_Basket.member_id = ?";
+        String basketlist = "SELECT DB2024_Mealkit.mealkit_id, name, price, category " +
+                "From DB2024_Mealkit, DB2024_Basket " +
+                "WHERE DB2024_Basket.mealkit_id=DB2024_Mealkit.mealkit_id " +
+                "AND DB2024_Basket.member_id = ?";
 
 
         try (// DB 연결을 위한 정보를 설정
@@ -21,7 +24,7 @@ public class BasketController {
 
             try(ResultSet resultSet = statement.executeQuery()){
                 System.out.println("==================장바구니 목록=====================");
-                System.out.println("상품 번호:\t\t상품명:\t\t\t\t가격:\t\t\t카테고리:");
+                System.out.println("[상품 번호]\t\t[상품명]\t\t\t\t[가격]\t\t\t[카테고리]");
                 // 결과를 출력합니다.
                 while (resultSet.next()) {
                     int mealkitId = resultSet.getInt("mealkit_id");
@@ -29,7 +32,7 @@ public class BasketController {
                     int price = resultSet.getInt("price");
                     String category = resultSet.getString("category");
 
-                    System.out.printf("%d\t\t\t%s\t\t\t%d\t\t\t%s\n", mealkitId, name, price, category);
+                    System.out.printf("%d\t\t%s\t\t\t%d\t\t\t%s\n", mealkitId, name, price, category);
                 }
                 System.out.println("=================================================");
             }
