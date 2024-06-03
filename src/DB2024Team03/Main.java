@@ -54,7 +54,7 @@ public class Main {
 								System.out.println("========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
-								System.out.print("[1]북마크 [2]장바구니 [3]작성했던 리뷰 목록 [4]주문내역 [5]메인페이지 >> ");
+								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]메인페이지 >> ");
 
 								int myselect = sc.nextInt();
 
@@ -79,9 +79,6 @@ public class Main {
 
 										break;
 									case 2:
-										// 장바구니
-										break;
-									case 3:
 										// 작성했던 리뷰 목록
 										ReviewController reviewController = new ReviewController();
 										reviewController.displayMemberReviews(member.getId());
@@ -89,12 +86,12 @@ public class Main {
 											keepGoing = true; // Maintain loop in MyPage if user inputs 'y'
 										}
 										break;
-									case 4:
+									case 3:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
 										OrdersController.displayOrdersList(member.getId(), sc);
 										break;
-									case 5:
+									case 4:
 										keepGoing = false; // Exit 마이페이지 loop
 										break;
 								}
