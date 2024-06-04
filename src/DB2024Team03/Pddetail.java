@@ -9,7 +9,7 @@ public class Pddetail {
 
     public static void displayProductdetail(int memberId) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("상품 id를 입력하세요: ");
+        System.out.print("상품 ID를 입력하세요: ");
         int PDid = sc.nextInt();
 
         // 상품상세 쿼리
@@ -27,7 +27,7 @@ public class Pddetail {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================상품 상세==================");
-            System.out.println("[상품번호]\t\t[상품이름]\t\t\t[가격]\t\t[카테고리]\t\t[밀키트 설명]\t\t\t\t\t\t\t\t\t[재고량]\t[북마크 수]");
+            System.out.println("[상품 ID]\t[상품이름]\t\t[가격]\t\t[카테고리]\t[밀키트 설명]\t\t\t\t\t\t\t\t\t[재고량]\t[북마크 수]");
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     int id = rs.getInt("mealkit_id");
