@@ -15,7 +15,7 @@ public class Pdlistcontroller{
             while (rs.next()) {
                 int id = rs.getInt("mealkit_id");
                 String name = rs.getString("name");
-                int price = rs.getInt("price");1
+                int price = rs.getInt("price");
                 int bookmark_count = rs.getInt("bookmark_count");
 
                 System.out.printf("%d\t\t\t%s\t\t%d\t\t%d%n", id, name, price, bookmark_count);
