@@ -43,8 +43,8 @@ public class BasketController {
         }
     }
 
-    public static void deleteBasketItem(int id, int basketId){
-        String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND basket_id=?";
+    public static void deleteBasketItem(int id, int mealkitId){
+        String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND mealkit_id=?";
 
         try (// DB 연결을 위한 정보를 설정
              Connection conn = DBconnect.getConnection();
@@ -52,12 +52,12 @@ public class BasketController {
         ){
 
             statement.setInt(1, id);
-            statement.setInt(2, basketId);
+            statement.setInt(2, mealkitId);
 
             try {
                 statement.executeUpdate();
 
-                System.out.print("상품이 제거되었습니다.");
+                System.out.print("상품이 제거되었습니다.\n");
                 return;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
