@@ -40,7 +40,7 @@ public class MemberController {
 	public void signup(String id, String pw, String name, String address) {
 		String maxIdQuery = "SELECT MAX(member_id) AS id FROM DB2024_Member";
 		String insertquery = "INSERT INTO DB2024_Member (member_id, id, password, member_name, address) VALUES (?, ?, ?, ?, ?)";
-		
+
 		try(
 				//db와 연결
 				Connection connection = DBconnect.getConnection();
