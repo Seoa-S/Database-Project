@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Pdlistcontroller{
     public static void displayProductList(int memberId) {
-        String query = "SELECT * FROM ProductWithBookmark_view";
+        String query = "SELECT * FROM DB2024_ProductWithBookmark_view";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
@@ -15,7 +15,7 @@ public class Pdlistcontroller{
             while (rs.next()) {
                 int id = rs.getInt("mealkit_id");
                 String name = rs.getString("name");
-                int price = rs.getInt("price");
+                int price = rs.getInt("price");1
                 int bookmark_count = rs.getInt("bookmark_count");
 
                 System.out.printf("%d\t\t\t%s\t\t%d\t\t%d%n", id, name, price, bookmark_count);
