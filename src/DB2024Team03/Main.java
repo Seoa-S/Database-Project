@@ -141,10 +141,16 @@ public class Main {
 							}
 
 							else if(basketselect == 3){
-								//제거하고 싶은 상품 mealkitId 입력받기
-								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-								int mealkitId = sc.nextInt();
-								BasketController.deleteBasketItem(member.getId(), mealkitId);
+								//장바구니에 상품이 존재하는지 확인
+								int itemNum = BasketController.checkBasket(member.getId());
+								if(itemNum > 0){
+									//제거하고 싶은 상품 mealkitId 입력받기
+									System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+									int mealkitId = sc.nextInt();
+									BasketController.deleteBasketItem(member.getId(), mealkitId);
+								}
+								else System.out.println("제거할 상품이 없습니다.");
+
 							}
 							else if (basketselect == 4){
 								//메인페이지로 이동

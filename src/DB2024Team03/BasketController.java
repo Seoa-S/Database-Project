@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class BasketController {
 
@@ -25,7 +24,7 @@ public class BasketController {
             try(ResultSet resultSet = statement.executeQuery()){
                 System.out.println("==================장바구니 목록=====================");
                 System.out.println("[상품 번호]\t[상품명]\t\t\t[가격]\t\t[카테고리]");
-                // 결과를 출력합니다.
+                // 결과 출력
                 while (resultSet.next()) {
                     int mealkitId = resultSet.getInt("mealkit_id");
                     String name = resultSet.getString("name");
@@ -41,6 +40,29 @@ public class BasketController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int checkBasket(int id){
+        String checkBasket = "SELECT COUNT(*) FROM DB2024_BASKET WHERE member_id=?";
+
+        try (// DB 연결을 위한 정보를 설정
+             Connection conn = DBconnect.getConnection();
+             PreparedStatement statement = conn.prepareStatement(checkBasket);
+        ){
+
+            statement.setInt(1, id);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                // 장바구니 아이템 개수 받아오기
+                if (resultSet.next()){
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
     }
 
     public static void deleteBasketItem(int id, int mealkitId){
