@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f7f9af8-2390-47a0-911f-fcdad240da92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/BasketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/BasketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB2024Team03/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,8 @@
       <workItem from="1716834232841" duration="7706000" />
       <workItem from="1717395651029" duration="1696000" />
       <workItem from="1717411832929" duration="1567000" />
-      <workItem from="1717516472389" duration="317000" />
+      <workItem from="1717516472389" duration="944000" />
+      <workItem from="1717517517992" duration="1071000" />
     </task>
     <servers />
   </component>
