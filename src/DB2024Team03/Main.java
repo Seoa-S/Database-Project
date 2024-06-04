@@ -69,8 +69,8 @@ public class Main {
 
 										if (bookmarkselect == 1){
 											System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-											int BookmarkId = sc.nextInt();
-											BookmarkController.deleteBookmarkItem(member.getId(), BookmarkId);
+											int MealkitId = sc.nextInt();
+											BookmarkController.deleteBookmarkItem(member.getId(), MealkitId);
 										}
 										else if(bookmarkselect == 2){
 											continue;
