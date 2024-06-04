@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class BookmarkController {
     public static void displayBookmarkList(int member_id){
-        String bookmarkquery = "SELECT production_name, mealkit_id FROM bookmarklist_view WHERE member_id = ?";
+        String bookmarkquery = "SELECT production_name, mealkit_id FROM DB2024_Bookmarklist_view WHERE member_id = ?";
         try (
                 Connection conn = DBconnect.getConnection();
                 PreparedStatement statement = conn.prepareStatement(bookmarkquery)) {
