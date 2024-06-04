@@ -175,7 +175,7 @@ public class Main {
 				}
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
-				//TODO : 회원 중복확인
+
 				System.out.print("본인이름 : ");
 				String name = sc.nextLine();
 				System.out.print("주소 : ");
