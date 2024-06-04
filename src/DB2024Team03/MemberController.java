@@ -38,7 +38,6 @@ public class MemberController {
 
 	
 	public void signup(String id, String pw, String name, String address) {
-
 		String maxIdQuery = "SELECT MAX(member_id) AS id FROM DB2024_Member";
 		String insertquery = "INSERT INTO DB2024_Member (member_id, id, password, member_name, address) VALUES (?, ?, ?, ?, ?)";
 
@@ -46,8 +45,11 @@ public class MemberController {
 				//db와 연결
 				Connection connection = DBconnect.getConnection();
 				PreparedStatement maxIdstatement = connection.prepareStatement(maxIdQuery);
-				PreparedStatement insertstatement = connection.prepareStatement(insertquery);
+				PreparedStatement insertstatement = connection.prepareStatement(insertquery)
 		){
+			//transaction 시작
+			connection.setAutoCommit(false);
+			
 			int MaxMemberId = 0;
 	        try (ResultSet maxIdresult = maxIdstatement.executeQuery()) {
 	            if (maxIdresult.next()) {
@@ -67,9 +69,13 @@ public class MemberController {
 	        
             try{
             	insertstatement.executeUpdate();
+				//트랜잭션 커밋
+				connection.commit();
                 System.out.println("회원가입 성공");
             } catch(SQLException e) {
         		e.printStackTrace();
+				// 트랜잭션 롤백
+				connection.rollback();
         		System.out.println("회원가입에 실패했습니다.");
         	}
 		} catch(SQLException e) {
@@ -80,7 +86,7 @@ public class MemberController {
 
 	public boolean MemberDuplicate(String id){
 		//해당 id를 가진 member가 존재하는지 확인하는 코드
-		String idCheckquery = "SELECT * FROM Member WHERE id = ?";
+		String idCheckquery = "SELECT * FROM DB2024_Member WHERE id = ?";
 
 		try(
 				//db와 연결
