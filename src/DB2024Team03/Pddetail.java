@@ -17,11 +17,6 @@ public class Pddetail {
                 "FROM DB2024_Mealkit M LEFT JOIN DB2024_Bookmark B ON M.mealkit_id = B.mealkit_id " +
                 "WHERE M.mealkit_id = ? GROUP BY M.mealkit_id";
 
-        // 해당리뷰목록 쿼리
-        /*String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
-                "FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
-                "WHERE R.mealkit_id = ?";*/
-
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query1)) {
 
@@ -45,7 +40,7 @@ public class Pddetail {
                 int mselect = sc.nextInt();
                 // 장바구니에 추가
                 if (mselect == 1) {
-                    System.out.print("장바구니에 넣으시겠습니까? (y): ");
+                    System.out.print("장바구니에 넣으시겠습니까? (y를 입력해야 추가됩니다.): ");
                     sc.nextLine(); // 버퍼 비우기
                     String confirm = sc.nextLine();
                     if ("y".equalsIgnoreCase(confirm)) {
@@ -57,14 +52,15 @@ public class Pddetail {
                     }
                 } // 북마크에 추가
                 else if (mselect == 2) {
-                    System.out.print("북마크에 추가하시겠습니까? (y): ");
+                    System.out.print("북마크에 추가하시겠습니까? (y를 입력해야 추가됩니다.): ");
                     sc.nextLine(); // 버퍼 비우기
                     String confirm = sc.nextLine();
                     if ("y".equalsIgnoreCase(confirm)) {
                         addToBookmark(PDid, memberId);
                     } else {
-                        System.out.println("마이페이지로 돌아갑니다.");
-
+                        System.out.println("상품 목록으로 돌아갑니다.");
+                        // 상품 목록으로 돌아가는 코드
+                        Pdlistcontroller.displayProductList(memberId);
                     }
                 } // 리뷰목록
                 else if (mselect == 3) {
@@ -85,6 +81,7 @@ public class Pddetail {
 
     // 해당 상품(PDid)에 대한 리뷰 출력하는 코드
     private static void displayReviews(int PDid) {
+        // 해당리뷰목록 쿼리
         String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
                 "FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
                 "WHERE R.mealkit_id = ?";
@@ -115,42 +112,63 @@ public class Pddetail {
 
     // 장바구니에 상품 추가하는 메서드
     private static void addToBasket(int PDid, int memberId) {
-        String query = "INSERT INTO DB2024_Basket (mealkit_id, member_id) VALUES (?, ?)";
+        // 상품이 이미 장바구니에 있는지 확인하는 쿼리
+        String checkQuery = "SELECT COUNT(*) FROM DB2024_Basket WHERE mealkit_id = ? AND member_id = ?";
+        String insertQuery = "INSERT INTO DB2024_Basket (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
-            pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
-            pstmt.setInt(2, memberId); // 로그인한 사용자 id를 sql문에 넣어줌
-
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("상품이 장바구니에 추가되었습니다.");
+            checkStmt.setInt(1, PDid);
+            checkStmt.setInt(2, memberId);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("이미 장바구니에 있는 상품입니다.");
+                // 상품 목록으로 돌아가는 코드
+                Pdlistcontroller.displayProductList(memberId);
             } else {
-                System.out.println("상품을 장바구니에 추가하지 못했습니다.");
+                insertStmt.setInt(1, PDid);
+                insertStmt.setInt(2, memberId);
+                int rowsAffected = insertStmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("상품이 장바구니에 추가되었습니다.");
+                } else {
+                    System.out.println("상품을 장바구니에 추가하지 못했습니다.");
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    // 북마크에 상품 추가하는 메서드
     private static void addToBookmark(int PDid, int memberId) {
-        String query = "INSERT INTO DB2024_Bookmark (mealkit_id, member_id) VALUES (?, ?)";
+        // 상품이 이미 북마크에 있는지 확인하는 쿼리
+        String checkQuery = "SELECT COUNT(*) FROM DB2024_Bookmark WHERE mealkit_id = ? AND member_id = ?";
+        String insertQuery = "INSERT INTO DB2024_Bookmark (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
-            pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
-            pstmt.setInt(2, memberId); // 로그인한 사용자 id를 sql문에 넣어줌
-
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("상품이 북마크에 추가되었습니다.");
+            checkStmt.setInt(1, PDid);
+            checkStmt.setInt(2, memberId);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("이미 북마크에 있는 상품입니다.");
+                // 상품 목록으로 돌아가는 코드
+                Pdlistcontroller.displayProductList(memberId);
             } else {
-                System.out.println("상품을 북마크에 추가하지 못했습니다.");
+                insertStmt.setInt(1, PDid);
+                insertStmt.setInt(2, memberId);
+                int rowsAffected = insertStmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("상품이 북마크에 추가되었습니다.");
+                } else {
+                    System.out.println("상품을 북마크에 추가하지 못했습니다.");
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
