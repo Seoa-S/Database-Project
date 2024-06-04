@@ -141,10 +141,10 @@ public class Main {
 							}
 
 							else if(basketselect == 3){
-								//제거하고 싶은 상품 basketId 입력받기
+								//제거하고 싶은 상품 mealkitId 입력받기
 								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-								int basketId = sc.nextInt();
-								BasketController.deleteBasketItem(member.getId(), basketId);
+								int mealkitId = sc.nextInt();
+								BasketController.deleteBasketItem(member.getId(), mealkitId);
 							}
 							else if (basketselect == 4){
 								//메인페이지로 이동
