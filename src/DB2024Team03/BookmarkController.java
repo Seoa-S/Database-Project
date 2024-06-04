@@ -13,7 +13,7 @@ public class BookmarkController {
 
             ResultSet rs = statement.executeQuery();
 
-            System.out.println("[상품Id]\t\t[상품이름]");
+            System.out.println("[상품 ID]\t[상품이름]");
             while (rs.next()) {
                 int bookmark_id = rs.getInt("bookmark_id");
                 String production_name = rs.getString("production_name");
