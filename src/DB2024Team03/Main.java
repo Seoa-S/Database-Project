@@ -63,7 +63,7 @@ public class Main {
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
 										BookmarkController.displayBookmarkList(member.getId());
-										System.out.print("[1]북마크 제거 [2]메인페이지 >> ");
+										System.out.print("[1]북마크 제거 [2]마이페이지 >> ");
 
 										int bookmarkselect = sc.nextInt();
 

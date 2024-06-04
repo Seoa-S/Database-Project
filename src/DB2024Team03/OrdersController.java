@@ -17,9 +17,9 @@ public class OrdersController {
             ResultSet rs = statement.executeQuery();
 
             System.out.println("[주문내역]");
-            System.out.println("상품 ID\t상품 이름\t가격\t주문 날짜:");
+            System.out.println("[상품 ID]\t[상품 이름]\t\t[가격]\t[주문 날짜]");
             while (rs.next()) {
-                System.out.printf("%d\t%s\t%d\t%s%n",
+                System.out.printf("%d\t\t\t%s\t\t%d\t%s%n",
                         rs.getInt("mealkit_id"),
                         rs.getString("name"),
                         rs.getInt("price"),  // Assuming you want to display the price

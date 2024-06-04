@@ -11,7 +11,7 @@ public class Pdlistcontroller{
              ResultSet rs = pstmt.executeQuery()) {
 
             System.out.println("==================상품 목록==================");
-            System.out.println("[상품번호]\t\t[상품이름]\t\t\t[가격]\t\t[북마크 수]");
+            System.out.println("[상품 ID]\t[상품이름]\t\t[가격]\t\t[북마크 수]");
             while (rs.next()) {
                 int id = rs.getInt("mealkit_id");
                 String name = rs.getString("name");
