@@ -30,6 +30,7 @@ public class ReviewController {
     public void showMemberReviews(int memberId) {
         List<ReviewDTO> reviews = getMemberReviews(memberId); // 회원의 리뷰 리스트 가져오기
         if (reviews.isEmpty()) { // 리뷰가 없는 경우
+            System.out.println();
             System.out.println("작성된 리뷰가 없습니다.");
         } else { // 리뷰가 존재하는 경우 각 리뷰 출력
             for (ReviewDTO review : reviews) {

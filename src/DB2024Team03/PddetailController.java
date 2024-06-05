@@ -101,31 +101,34 @@ public class PddetailController {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================해당 상품 리뷰==================");
-            try {
-                if(UtilController.checkItemNum(1, "DB2024_Review", conn) > 0){
-                    ResultSet rs = pstmt.executeQuery();
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                // 결과가 있는지 확인
+                if (!rs.isBeforeFirst()) {
+                    // ResultSet이 비어있으면
+                    System.out.println("아직 등록된 리뷰가 없습니다.");
+                } else {
                     while (rs.next()) {
                         String productName = rs.getString("product_name");
                         String content = rs.getString("content");
                         String date = rs.getString("date");
                         String member_id = rs.getString("member_id");
-                        System.out.println("[상품이름]" + productName);
-                        System.out.println("[리뷰내용]" + content);
-                        System.out.println("[작성날짜]" + date);
-                        System.out.println("[작성자 ID]" + member_id);
+                        System.out.println("[상품이름] " + productName);
+                        System.out.println("[리뷰내용] " + content);
+                        System.out.println("[작성날짜] " + date);
+                        System.out.println("[작성자 ID] " + member_id);
                         System.out.println();
                     }
-                } else
-                    System.out.println("아직 등록된 리뷰가 없습니다.");
-
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     // 장바구니에 상품 추가하는 메서드
     private static void addToBasket(int PDid, int memberId) {
