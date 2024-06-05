@@ -42,30 +42,8 @@ public class BasketController {
         }
     }
 
-    public static int checkBasket(int id){
-        String checkBasket = "SELECT COUNT(*) FROM DB2024_BASKET WHERE member_id=?";
-
-        try (// DB 연결을 위한 정보를 설정
-             Connection conn = DBconnect.getConnection();
-             PreparedStatement statement = conn.prepareStatement(checkBasket);
-        ){
-
-            statement.setInt(1, id);
-
-            try(ResultSet resultSet = statement.executeQuery()){
-                // 장바구니 아이템 개수 받아오기
-                if (resultSet.next()){
-                    return resultSet.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return 0;
-    }
-
     public static void deleteBasketItem(int id, int mealkitId) {
+
         String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND mealkit_id=?";
 
         Connection conn = null;
@@ -81,6 +59,7 @@ public class BasketController {
 
             try {
                 if (UtilController.checkIdExist(mealkitId, id, "DB2024_Basket", conn)) {
+
                     statement.executeUpdate();
                     System.out.print("상품이 제거되었습니다.\n");
                     conn.commit(); // 변경사항 커밋
