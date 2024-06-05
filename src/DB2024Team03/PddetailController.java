@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
-public class Pddetail {
+public class PddetailController {
 
     public static void displayProductdetail(int memberId) {
         Scanner sc = new Scanner(System.in);
