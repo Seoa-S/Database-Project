@@ -124,7 +124,7 @@ public class ReviewController {
                 }
 
                 else {
-                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다..\n");
+                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다.\n");
                 }
 
             } catch (SQLException e) {
