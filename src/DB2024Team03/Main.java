@@ -37,7 +37,7 @@ public class Main {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
-						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 >> ");
+						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]로그아웃 >> ");
 						
 						int mainselect = sc.nextInt();
 
@@ -139,7 +139,7 @@ public class Main {
 									e.printStackTrace();
                                 } finally {
 									if(conn != null){
-										conn.close();
+										conn.setAutoCommit(true);
 									}
 								}
 
@@ -172,6 +172,14 @@ public class Main {
 								System.out.println("잘못 입력하셨습니다.");
 
 						}
+						//로그아웃
+						else if (mainselect == 4) {
+							//memberDTO null로 바꾸기
+							member = null;
+							break;
+						}
+						else
+							System.out.println("잘못된 번호를 입력하셨습니다.");
 					}
 				}
 			}

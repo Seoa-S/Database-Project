@@ -73,18 +73,22 @@ public class BasketController {
              PreparedStatement statement = conn.prepareStatement(deleteItem);
         ){
 
+            conn.setAutoCommit(false);
+
             statement.setInt(1, id);
             statement.setInt(2, mealkitId);
 
             try {
                 statement.executeUpdate();
-
                 System.out.print("상품이 제거되었습니다.\n");
+                conn.commit();
                 return;
             } catch (SQLException e) {
+                conn.rollback();
                 throw new RuntimeException(e);
+            } finally {
+                conn.setAutoCommit(true); // Ensure auto-commit is reset in the finally block
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
