@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class OrdersController {
-    public static void displayOrdersList(int member_id, Scanner sc) {
+    public static void showOrdersList(int member_id, Scanner sc) {
         String ordersquery = "SELECT M.name, O.orderdate, M.price, O.mealkit_id " +
                 "FROM DB2024_Orders O INNER JOIN DB2024_Mealkit M ON O.mealkit_id = M.mealkit_id " +
                 "WHERE O.member_id = ?";
@@ -33,7 +33,7 @@ public class OrdersController {
                 int productId = sc.nextInt();
                 sc.nextLine();
                 ReviewController reviewController = new ReviewController();
-                reviewController.displayReview(productId);
+                reviewController.showReview(productId);
                 System.out.println("리뷰를 작성하세요 (엔터를 누르면 작성 완료): ");
                 String reviewContent = sc.nextLine();
                 reviewController.createReview(member_id, productId, reviewContent, sc);

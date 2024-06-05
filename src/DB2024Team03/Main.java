@@ -43,7 +43,7 @@ public class Main {
 
 						// 1. 상품목록
 						if (mainselect == 1) {
-							Pdlistcontroller.displayProductList(member.getId());
+							Pdlistcontroller.showProductList(member.getId());
 
 						}
 
@@ -62,7 +62,7 @@ public class Main {
 									case 1:
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
-										BookmarkController.displayBookmarkList(member.getId());
+										BookmarkController.showBookmarkList(member.getId());
 										System.out.print("[1]북마크 제거 [2]마이페이지 >> ");
 
 										int bookmarkselect = sc.nextInt();
@@ -82,7 +82,7 @@ public class Main {
 										// 작성했던 리뷰 목록
 										System.out.print("=====================작성했던 리뷰 목록======================");
 										ReviewController reviewController = new ReviewController();
-										reviewController.displayMemberReviews(member.getId());
+										reviewController.showMemberReviews(member.getId());
 										System.out.print("[1]리뷰 제거 [2]마이페이지 >> ");
 
 										int reviewselect = sc.nextInt();
@@ -101,7 +101,7 @@ public class Main {
 									case 3:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
-										OrdersController.displayOrdersList(member.getId(), sc);
+										OrdersController.showOrdersList(member.getId(), sc);
 										break;
 									case 4:
 										Mcon.changeAdd(member);
@@ -151,7 +151,7 @@ public class Main {
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
-								Pdlistcontroller.displayProductList(member.getId());
+								Pdlistcontroller.showProductList(member.getId());
 
 							}
 
