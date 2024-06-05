@@ -22,7 +22,7 @@ public class PddetailController {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================상품 상세==================");
-            System.out.println("[상품 ID]\t[상품이름]\t\t[가격]\t[재고량]\t[북마크 수]\t\t[카테고리]\t\t[밀키트 설명]");
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     int id = rs.getInt("mealkit_id");
@@ -33,7 +33,14 @@ public class PddetailController {
                     String category = rs.getString("category");
                     String info = rs.getString("info");
 
-                    System.out.printf("%d\t\t\t%s\t\t%d\t%d\t\t%d\t\t\t\t%s\t\t\t%s%n", id, name, price,   stock, bookmarknum,category, info);
+                    System.out.println("[상품 ID]" + id);
+                    System.out.println("[상품 이름]" + name);
+                    System.out.println("[가격]" + price);
+                    System.out.println("[재고량]" + stock);
+                    System.out.println("[북마크 수]" + bookmarknum);
+                    System.out.println("[카테고리]" + category);
+                    System.out.println("[밀키트 설명]" + info);
+
                 }
 
                 System.out.print("[1]장바구니 [2]북마크 [3]리뷰목록 [4]상품 목록  >> ");
@@ -80,10 +87,13 @@ public class PddetailController {
     }
 
     // 해당 상품(PDid)에 대한 리뷰 출력하는 코드
-    private static void showReviews(int PDid) {
+    private static void showReviews(int PDid) exit
+    {
         // 해당리뷰목록 쿼리
-        String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
-                "FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
+        String query2 = "SELECT MM.id AS member_id, R.content, R.date, M.name AS product_name " +
+                "FROM DB2024_Review R " +
+                "INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
+                "INNER JOIN DB2024_Member MM ON R.member_id = MM.member_id " +
                 "WHERE R.mealkit_id = ?";
 
         try (Connection conn = DBconnect.getConnection();
@@ -96,11 +106,11 @@ public class PddetailController {
                     String productName = rs.getString("product_name");
                     String content = rs.getString("content");
                     String date = rs.getString("date");
-                    int member_id = rs.getInt("member_id");
+                    String member_id = rs.getString("member_id");
                     System.out.println("[상품이름]" + productName);
                     System.out.println("[리뷰내용]" + content);
                     System.out.println("[작성날짜]" + date);
-                    System.out.println("[작성자 id]" + member_id);
+                    System.out.println("[작성자 ID]" + member_id);
                     System.out.println();
                 }
             }
@@ -120,11 +130,14 @@ public class PddetailController {
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
              PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
+            conn.setAutoCommit(false); // 트랜잭션 시작
+
             checkStmt.setInt(1, PDid);
             checkStmt.setInt(2, memberId);
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
                 System.out.println("이미 장바구니에 있는 상품입니다.");
+                conn.rollback(); // 트랜잭션 롤백
                 // 상품 목록으로 돌아가는 코드
                 Pdlistcontroller.showProductList(memberId);
             } else {
@@ -133,12 +146,20 @@ public class PddetailController {
                 int rowsAffected = insertStmt.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("상품이 장바구니에 추가되었습니다.");
+                    conn.commit(); // 트랜잭션 커밋
                 } else {
                     System.out.println("상품을 장바구니에 추가하지 못했습니다.");
+                    conn.rollback(); // 트랜잭션 롤백
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try (Connection conn = DBconnect.getConnection()) {
+                conn.setAutoCommit(true); // 자동 커밋 모드로 되돌리기
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -152,11 +173,14 @@ public class PddetailController {
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
              PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
+            conn.setAutoCommit(false); // 트랜잭션 시작
+
             checkStmt.setInt(1, PDid);
             checkStmt.setInt(2, memberId);
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
                 System.out.println("이미 북마크에 있는 상품입니다.");
+                conn.rollback(); // 트랜잭션 롤백
                 // 상품 목록으로 돌아가는 코드
                 Pdlistcontroller.showProductList(memberId);
             } else {
@@ -165,12 +189,20 @@ public class PddetailController {
                 int rowsAffected = insertStmt.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("상품이 북마크에 추가되었습니다.");
+                    conn.commit(); // 트랜잭션 커밋
                 } else {
                     System.out.println("상품을 북마크에 추가하지 못했습니다.");
+                    conn.rollback(); // 트랜잭션 롤백
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try (Connection conn = DBconnect.getConnection()) {
+                conn.setAutoCommit(true); // 자동 커밋 모드로 되돌리기
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
