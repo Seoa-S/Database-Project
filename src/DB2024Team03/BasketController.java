@@ -21,19 +21,27 @@ public class BasketController {
 
             statement.setInt(1, id);
 
-            try(ResultSet resultSet = statement.executeQuery()){
-                System.out.println("==================장바구니 목록=====================");
-                System.out.println("[상품 번호]\t[상품명]\t\t\t[가격]\t\t[카테고리]");
-                // 결과 출력
-                while (resultSet.next()) {
-                    int mealkitId = resultSet.getInt("mealkit_id");
-                    String name = resultSet.getString("name");
-                    int price = resultSet.getInt("price");
-                    String category = resultSet.getString("category");
+            try{
+                if(UtilController.checkItemNum(id, "DB2024_Basket", conn) > 0){
+                    ResultSet resultSet = statement.executeQuery();
+                    System.out.println("==================장바구니 목록=====================");
+                    System.out.println("[상품 번호]\t[상품명]\t\t\t[가격]\t\t[카테고리]");
+                    // 결과 출력
+                    while (resultSet.next()) {
+                        int mealkitId = resultSet.getInt("mealkit_id");
+                        String name = resultSet.getString("name");
+                        int price = resultSet.getInt("price");
+                        String category = resultSet.getString("category");
 
-                    System.out.printf("%d\t\t\t%s\t\t%d\t\t%s\n", mealkitId, name, price, category);
+                        System.out.printf("%d\t\t\t%s\t\t%d\t\t%s\n", mealkitId, name, price, category);
+                    }
+                    System.out.println("=================================================");
+                }else {
+                    System.out.println("장바구니가 비었습니다.");
+
                 }
-                System.out.println("=================================================");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
 
@@ -42,57 +50,58 @@ public class BasketController {
         }
     }
 
-    public static int checkBasket(int id){
-        String checkBasket = "SELECT COUNT(*) FROM DB2024_BASKET WHERE member_id=?";
+    public static void deleteBasketItem(int id, int mealkitId) {
 
-        try (// DB 연결을 위한 정보를 설정
-             Connection conn = DBconnect.getConnection();
-             PreparedStatement statement = conn.prepareStatement(checkBasket);
-        ){
+        String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND mealkit_id=?";
 
+        Connection conn = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DBconnect.getConnection();
+            conn.setAutoCommit(false); // 트랜잭션 시작
+
+            statement = conn.prepareStatement(deleteItem);
             statement.setInt(1, id);
+            statement.setInt(2, mealkitId);
 
-            try(ResultSet resultSet = statement.executeQuery()){
-                // 장바구니 아이템 개수 받아오기
-                if (resultSet.next()){
-                    return resultSet.getInt(1);
+            try {
+                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Basket", conn)) {
+
+                    statement.executeUpdate();
+                    System.out.print("상품이 제거되었습니다.\n");
+                    conn.commit(); // 변경사항 커밋
+                } else {
+                    System.out.print("해당 상품ID가 장바구니에 존재하지 않습니다.\n");
+                    conn.commit(); // 트랜잭션 완료 (실제로 삭제할 항목이 없는 경우에도)
+                }
+            } catch (SQLException e) {
+                conn.rollback(); // 예외 발생 시 롤백
+                throw new RuntimeException(e);
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.setAutoCommit(true); // 자동 커밋 모드 재설정
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        conn.close(); // 연결 닫기
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                if (statement != null) {
+                    try {
+                        statement.close(); // PreparedStatement 닫기
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return 0;
-    }
-
-    public static void deleteBasketItem(int id, int mealkitId){
-        String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND mealkit_id=?";
-
-        try (// DB 연결을 위한 정보를 설정
-             Connection conn = DBconnect.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteItem);
-        ){
-
-            conn.setAutoCommit(false);
-
-            statement.setInt(1, id);
-            statement.setInt(2, mealkitId);
-
-            try {
-                statement.executeUpdate();
-                System.out.print("상품이 제거되었습니다.\n");
-                conn.commit();
-                return;
-            } catch (SQLException e) {
-                conn.rollback();
-                throw new RuntimeException(e);
-            } finally {
-                conn.setAutoCommit(true); // Ensure auto-commit is reset in the finally block
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     public static void updateOrderList(int id, Connection conn){

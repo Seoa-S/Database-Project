@@ -14,13 +14,13 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		MemberController Mcon = new MemberController();
 		MemberDTO member;
-		
+
 		while(true) {
 			System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
 			System.out.print("[1]로그인 [2]회원가입 [3]종료 >> ");
-			
+
 			int select = sc.nextInt();
-			
+
 			if(select == 1) {
 				//로그인
 				sc.nextLine();
@@ -38,7 +38,7 @@ public class Main {
 					while(true) {
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
 						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]로그아웃 >> ");
-						
+
 						int mainselect = sc.nextInt();
 
 						// 1. 상품목록
@@ -81,21 +81,21 @@ public class Main {
 									case 2:
 										// 작성했던 리뷰 목록
 										System.out.print("=====================작성했던 리뷰 목록======================");
-										ReviewController reviewController = new ReviewController();
-										reviewController.showMemberReviews(member.getId());
-										System.out.print("[1]리뷰 제거 [2]마이페이지 >> ");
+										ReviewController reviewController = new ReviewController(); // ReviewController 인스턴스 생성
+										reviewController.showMemberReviews(member.getId()); // 로그인한 회원의 리뷰 목록을 출력
+										System.out.print("[1]리뷰 제거 [2]마이페이지 >> "); // 리뷰 관리 옵션 표시
 
-										int reviewselect = sc.nextInt();
+										int reviewselect = sc.nextInt(); // 사용자 입력 받기
 
 										if (reviewselect == 1){
 											System.out.print("제거하고 싶은 리뷰의 상품ID를 입력해주세요 >>");
-											int MealkitId = sc.nextInt();
-											reviewController.deleteReview(member.getId(), MealkitId);
+											int MealkitId = sc.nextInt(); // 리뷰를 제거할 상품 ID 입력받기
+											reviewController.deleteReview(member.getId(), MealkitId); // 입력받은 ID에 해당하는 리뷰 삭제
 										}
 										else if(reviewselect == 2){
-											continue;
+											continue; // 마이페이지로 돌아가기
 										}
-										else System.out.println("잘못 입력하셨습니다.");
+										else System.out.println("잘못 입력하셨습니다."); // 올바르지 않은 입력 처리
 
 										break;
 									case 3:
@@ -135,12 +135,12 @@ public class Main {
 									System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
 
 								} catch (SQLException e) {
-                                    //throw new RuntimeException(e);
+									//throw new RuntimeException(e);
 									if (conn != null){
 										conn.rollback();
 									}
 									e.printStackTrace();
-                                } finally {
+								} finally {
 									if(conn != null){
 										conn.setAutoCommit(true);
 									}
@@ -156,17 +156,13 @@ public class Main {
 							}
 
 							else if(basketselect == 3){
-								//장바구니에 상품이 존재하는지 확인
-								int itemNum = BasketController.checkBasket(member.getId());
-								if(itemNum > 0){
 									//제거하고 싶은 상품 mealkitId 입력받기
 									System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
 									int mealkitId = sc.nextInt();
 									BasketController.deleteBasketItem(member.getId(), mealkitId);
-								}
-								else System.out.println("제거할 상품이 없습니다.");
-
 							}
+
+
 							else if (basketselect == 4){
 								//메인페이지로 이동
 								continue;
@@ -221,7 +217,7 @@ public class Main {
 				DBconnect.closeConnection();
 				break;
 			}
-			else System.out.println("올바르지 않은 입력입니다.");
+			else {System.out.println("올바르지 않은 입력입니다.");}
 		}
 	}
 }
