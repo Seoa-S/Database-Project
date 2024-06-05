@@ -14,13 +14,13 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		MemberController Mcon = new MemberController();
 		MemberDTO member;
-		
+
 		while(true) {
 			System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
 			System.out.print("[1]로그인 [2]회원가입 [3]종료 >> ");
-			
+
 			int select = sc.nextInt();
-			
+
 			if(select == 1) {
 				//로그인
 				sc.nextLine();
@@ -36,9 +36,9 @@ public class Main {
 				if(member != null) {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
-						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
+						System.out.println("\n==================자취생을 위한 밀키트 쇼핑몰==================");
 						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]로그아웃 >> ");
-						
+
 						int mainselect = sc.nextInt();
 
 						// 1. 상품목록
@@ -51,7 +51,7 @@ public class Main {
 						else if (mainselect == 2) {
 							boolean keepGoing = true;
 							while (keepGoing) {
-								System.out.println("========================마이페이지=========================");
+								System.out.println("\n========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
 								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]내 정보 수정 [5]메인페이지 >> ");
@@ -81,21 +81,21 @@ public class Main {
 									case 2:
 										// 작성했던 리뷰 목록
 										System.out.print("=====================작성했던 리뷰 목록======================");
-										ReviewController reviewController = new ReviewController();
-										reviewController.showMemberReviews(member.getId());
-										System.out.print("[1]리뷰 제거 [2]마이페이지 >> ");
+										ReviewController reviewController = new ReviewController(); // ReviewController 인스턴스 생성
+										reviewController.showMemberReviews(member.getId()); // 로그인한 회원의 리뷰 목록을 출력
+										System.out.print("[1]리뷰 제거 [2]마이페이지 >> "); // 리뷰 관리 옵션 표시
 
-										int reviewselect = sc.nextInt();
+										int reviewselect = sc.nextInt(); // 사용자 입력 받기
 
 										if (reviewselect == 1){
 											System.out.print("제거하고 싶은 리뷰의 상품ID를 입력해주세요 >>");
-											int MealkitId = sc.nextInt();
-											reviewController.deleteReview(member.getId(), MealkitId);
+											int MealkitId = sc.nextInt(); // 리뷰를 제거할 상품 ID 입력받기
+											reviewController.deleteReview(member.getId(), MealkitId); // 입력받은 ID에 해당하는 리뷰 삭제
 										}
 										else if(reviewselect == 2){
-											continue;
+											continue; // 마이페이지로 돌아가기
 										}
-										else System.out.println("잘못 입력하셨습니다.");
+										else System.out.println("잘못 입력하셨습니다."); // 올바르지 않은 입력 처리
 
 										break;
 									case 3:
