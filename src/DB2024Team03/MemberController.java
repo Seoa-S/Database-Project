@@ -72,9 +72,10 @@ public class MemberController {
 				//에러가 생기면 트랜잭션 롤백
 				connection.rollback();
 				System.out.println("회원가입에 실패했습니다.");
+			} finally {
+				// AutoCommit true로 설정
+				connection.setAutoCommit(true);
 			}
-			//AutoCommit true로 설정
-			connection.setAutoCommit(true);
 
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -107,4 +108,6 @@ public class MemberController {
 			return false;
 		}
 	}
+
+
 }
