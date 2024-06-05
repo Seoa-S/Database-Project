@@ -3,6 +3,7 @@ package DB2024Team03;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class PddetailController {
@@ -100,18 +101,25 @@ public class PddetailController {
 
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================해당 상품 리뷰==================");
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String productName = rs.getString("product_name");
-                    String content = rs.getString("content");
-                    String date = rs.getString("date");
-                    String member_id = rs.getString("member_id");
-                    System.out.println("[상품이름]" + productName);
-                    System.out.println("[리뷰내용]" + content);
-                    System.out.println("[작성날짜]" + date);
-                    System.out.println("[작성자 ID]" + member_id);
-                    System.out.println();
-                }
+            try {
+                if(UtilController.checkItemNum(0, "DB2024_Review", conn) > 0){
+                    ResultSet rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        String productName = rs.getString("product_name");
+                        String content = rs.getString("content");
+                        String date = rs.getString("date");
+                        String member_id = rs.getString("member_id");
+                        System.out.println("[상품이름]" + productName);
+                        System.out.println("[리뷰내용]" + content);
+                        System.out.println("[작성날짜]" + date);
+                        System.out.println("[작성자 ID]" + member_id);
+                        System.out.println();
+                    }
+                } else
+                    System.out.println("아직 등록된 리뷰가 없습니다.");
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         } catch (Exception e) {

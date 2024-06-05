@@ -8,11 +8,10 @@ import java.sql.SQLException;
 public class UtilController {
 
     //테이블 안에 있는 상품의 개수 세기
-    public static int checkItemNum(int memberId, String DBName){
+    public static int checkItemNum(int memberId, String DBName, Connection conn){
         String checkBasket = "SELECT COUNT(*) FROM " +DBName+ " WHERE member_id=?";
 
         try (// DB 연결을 위한 정보를 설정
-             Connection conn = DBconnect.getConnection();
              PreparedStatement statement = conn.prepareStatement(checkBasket);
         ){
 

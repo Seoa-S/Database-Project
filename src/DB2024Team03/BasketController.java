@@ -21,19 +21,27 @@ public class BasketController {
 
             statement.setInt(1, id);
 
-            try(ResultSet resultSet = statement.executeQuery()){
-                System.out.println("==================장바구니 목록=====================");
-                System.out.println("[상품 번호]\t[상품명]\t\t\t[가격]\t\t[카테고리]");
-                // 결과 출력
-                while (resultSet.next()) {
-                    int mealkitId = resultSet.getInt("mealkit_id");
-                    String name = resultSet.getString("name");
-                    int price = resultSet.getInt("price");
-                    String category = resultSet.getString("category");
+            try{
+                if(UtilController.checkItemNum(id, "DB2024_Basket", conn) > 0){
+                    ResultSet resultSet = statement.executeQuery();
+                    System.out.println("==================장바구니 목록=====================");
+                    System.out.println("[상품 번호]\t[상품명]\t\t\t[가격]\t\t[카테고리]");
+                    // 결과 출력
+                    while (resultSet.next()) {
+                        int mealkitId = resultSet.getInt("mealkit_id");
+                        String name = resultSet.getString("name");
+                        int price = resultSet.getInt("price");
+                        String category = resultSet.getString("category");
 
-                    System.out.printf("%d\t\t\t%s\t\t%d\t\t%s\n", mealkitId, name, price, category);
+                        System.out.printf("%d\t\t\t%s\t\t%d\t\t%s\n", mealkitId, name, price, category);
+                    }
+                    System.out.println("=================================================");
+                }else {
+                    System.out.println("장바구니가 비었습니다.");
+
                 }
-                System.out.println("=================================================");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
 

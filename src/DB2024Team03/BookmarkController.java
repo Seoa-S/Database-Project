@@ -11,16 +11,18 @@ public class BookmarkController {
 
             statement.setInt(1, member_id);
 
-            ResultSet rs = statement.executeQuery();
+            if(UtilController.checkItemNum(member_id, "DB2024_Bookmark", conn) > 0){
+                ResultSet rs = statement.executeQuery();
 
-            System.out.println("[상품 ID]\t[상품이름]");
-            while (rs.next()) {
-                int mealkit_id = rs.getInt("mealkit_id");
-                String production_name = rs.getString("production_name");
+                System.out.println("[상품 ID]\t[상품이름]");
+                while (rs.next()) {
+                    int mealkit_id = rs.getInt("mealkit_id");
+                    String production_name = rs.getString("production_name");
 
-                System.out.printf("%d\t\t\t%s%n", mealkit_id, production_name);
-
-            }
+                    System.out.printf("%d\t\t\t%s%n", mealkit_id, production_name);
+                }
+            }else
+                System.out.println("북마크된 상품이 없습니다.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
