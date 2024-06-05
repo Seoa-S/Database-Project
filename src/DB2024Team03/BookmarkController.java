@@ -46,7 +46,7 @@ public class BookmarkController {
                 }
 
                 else {
-                    System.out.print("해당 상품ID가 북마크 목록에 존재하지 않습니다..\n");
+                    System.out.print("해당 상품ID 북마크 목록에 존재하지 않습니다..\n");
                 }
 
 

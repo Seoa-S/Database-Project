@@ -116,10 +116,17 @@ public class ReviewController {
             statement.setInt(2, MealkitId);
 
             try {
-                statement.executeUpdate();
+                if (UtilController.checkIdExist(MealkitId, id, "DB2024_Review" )) {
+                    statement.executeUpdate();
 
-                System.out.print("리뷰가 제거되었습니다.\n");
-                return;
+                    System.out.print("리뷰가 제거되었습니다.\n");
+                    return;
+                }
+
+                else {
+                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다..\n");
+                }
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
