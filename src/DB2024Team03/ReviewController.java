@@ -102,45 +102,35 @@ public class ReviewController {
     }
 
 
-    public void deleteReview(int id, int MealkitId) {
-        String deleteReview = "DELETE FROM DB2024_Review WHERE member_id=? AND mealkit_id=?"; // 리뷰 삭제 쿼리
+   public void deleteReview(int id, int MealkitId) {
+        String deleteReview = "DELETE FROM DB2024_Review WHERE member_id=? AND mealkit_id=?";
 
-        Connection conn = null; // Connection 객체 선언
-        try {
-            conn = DBconnect.getConnection(); // 데이터베이스 연결
-            conn.setAutoCommit(false); // 자동 커밋 비활성화
-            try (PreparedStatement statement = conn.prepareStatement(deleteReview)) {
-                statement.setInt(1, id); // memberId 설정
-                statement.setInt(2, MealkitId); // mealkitId 설정
-                int rowsAffected = statement.executeUpdate();  // 쿼리 실행 후 영향 받은 행의 수 반환
-                if (rowsAffected > 0) {
-                    System.out.println("리뷰가 제거되었습니다.\n");  // 성공 메시지 출력
-                    conn.commit();  // 변경 사항 커밋
-                } else {
-                    System.out.println("삭제할 리뷰가 없습니다.");  // 리뷰가 없는 경우 메시지 출력
-                    conn.rollback();  // 롤백 실행
+        try (// DB 연결을 위한 정보를 설정
+             Connection conn = DBconnect.getConnection();
+             PreparedStatement statement = conn.prepareStatement(deleteReview);
+        ){
+
+            statement.setInt(1, id);
+            statement.setInt(2, MealkitId);
+
+            try {
+                if (UtilController.checkIdExist(MealkitId, id, "DB2024_Review" )) {
+                    statement.executeUpdate();
+
+                    System.out.print("리뷰가 제거되었습니다.\n");
+                    return;
                 }
+
+                else {
+                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다.\n");
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+
         } catch (SQLException e) {
-            if (conn != null) {
-                try {
-                    conn.rollback();  // 예외 발생 시 롤백
-                    System.out.println("리뷰 삭제 중 오류가 발생했습니다: " + e.getMessage());  // 오류 메시지 출력
-                } catch (SQLException ex) {
-                    System.out.println("롤백 실패: " + ex.getMessage());  // 롤백 실패 메시지 출력
-                }
-            } else {
-                System.out.println("리뷰 삭제 중 오류가 발생했습니다: " + e.getMessage());  // 연결 실패 시 오류 메시지 출력
-            }
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.setAutoCommit(true); // 자동 커밋 활성화
-                    conn.close(); // 연결 닫기
-                } catch (SQLException e) {
-                    e.printStackTrace(); // 예외 처리
-                }
-            }
+            throw new RuntimeException(e);
         }
     }
 }

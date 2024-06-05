@@ -85,7 +85,7 @@ public class BasketController {
                 }
 
                 else {
-                    System.out.print("해당 상품ID가 장바구니에 존재하지 않습니다..\n");
+                    System.out.print("해당 상품ID가 장바구니에 존재하지 않습니다.\n");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

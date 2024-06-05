@@ -36,7 +36,7 @@ public class Main {
 				if(member != null) {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
-						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
+						System.out.println("\n==================자취생을 위한 밀키트 쇼핑몰==================");
 						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]로그아웃 >> ");
 
 						int mainselect = sc.nextInt();
@@ -51,7 +51,7 @@ public class Main {
 						else if (mainselect == 2) {
 							boolean keepGoing = true;
 							while (keepGoing) {
-								System.out.println("========================마이페이지=========================");
+								System.out.println("\n========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
 								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]내 정보 수정 [5]메인페이지 >> ");
