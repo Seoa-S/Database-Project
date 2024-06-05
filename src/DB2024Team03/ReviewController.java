@@ -26,7 +26,7 @@ public class ReviewController {
         return reviews;
     }
 
-    public void displayMemberReviews(int memberId) {
+    public void showMemberReviews(int memberId) {
         List<ReviewDTO> reviews = getMemberReviews(memberId);
         if (reviews.isEmpty()) {
             System.out.println("작성된 리뷰가 없습니다.");
@@ -40,19 +40,8 @@ public class ReviewController {
         }
     }
 
-    public boolean promptReturnToMyPage(Scanner sc) {
-        System.out.print("마이페이지로 돌아가시겠습니까? (y) >> ");
-        sc.nextLine(); // Clear the buffer after reading an integer
-        String back = sc.nextLine();
-        while (!back.equalsIgnoreCase("y")) {
-            System.out.println("잘못된 값을 입력하셨습니다.");
-            System.out.print("마이페이지로 돌아가시겠습니까? (y) >> ");
-            back = sc.nextLine();
-        }
-        return true;
-    }
 
-    public void displayReview(int mealkitId) {
+    public void showReview(int mealkitId) {
         String query = "SELECT name, price, stock FROM DB2024_Mealkit WHERE mealkit_id = ?";
         try (Connection conn = DBconnect.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -80,7 +69,7 @@ public class ReviewController {
             int result = pstmt.executeUpdate();
             if (result > 0) {
                 System.out.println("리뷰가 성공적으로 등록되었습니다.");
-                promptReturnToMyPage(sc);
+                return;
             } else {
                 System.out.println("리뷰 등록에 실패했습니다.");
             }

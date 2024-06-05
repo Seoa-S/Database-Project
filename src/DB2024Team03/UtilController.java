@@ -28,4 +28,30 @@ public class UtilController {
 
         return 0;
     }
+
+    public static boolean checkIdExist(int itemId, int memberId, String dbName) {
+        String checkIdExist = "SELECT mealkit_id FROM " + dbName + " WHERE member_id = ?";
+
+        try (
+                Connection conn = DBconnect.getConnection();
+                PreparedStatement statement = conn.prepareStatement(checkIdExist)) {
+
+            statement.setInt(1, memberId);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                int mealkit_id = rs.getInt("mealkit_id");
+
+                if (mealkit_id == itemId) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
+

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class PddetailController {
 
-    public static void displayProductdetail(int memberId) {
+    public static void showProductdetail(int memberId) {
         Scanner sc = new Scanner(System.in);
         System.out.print("상품 ID를 입력하세요: ");
         int PDid = sc.nextInt();
@@ -48,7 +48,7 @@ public class PddetailController {
                     } else {
                         System.out.println("상품 목록으로 돌아갑니다.");
                         // 상품 목록으로 돌아가는 코드
-                        Pdlistcontroller.displayProductList(memberId);
+                        Pdlistcontroller.showProductList(memberId);
                     }
                 } // 북마크에 추가
                 else if (mselect == 2) {
@@ -60,14 +60,14 @@ public class PddetailController {
                     } else {
                         System.out.println("상품 목록으로 돌아갑니다.");
                         // 상품 목록으로 돌아가는 코드
-                        Pdlistcontroller.displayProductList(memberId);
+                        Pdlistcontroller.showProductList(memberId);
                     }
                 } // 리뷰목록
                 else if (mselect == 3) {
-                    displayReviews(PDid);
+                    showReviews(PDid);
                 } // 상품목록으로 돌아가기
                 else if (mselect == 4) {
-                    Pdlistcontroller.displayProductList(memberId);
+                    Pdlistcontroller.showProductList(memberId);
                 } // 1~4를 입력하지 않았을 때 출력 후 메인페이지로 돌아감
                 else {
                     System.out.println("올바르지 않은 입력입니다.");
@@ -80,7 +80,7 @@ public class PddetailController {
     }
 
     // 해당 상품(PDid)에 대한 리뷰 출력하는 코드
-    private static void displayReviews(int PDid) {
+    private static void showReviews(int PDid) {
         // 해당리뷰목록 쿼리
         String query2 = "SELECT R.member_id, R.content, R.date, M.name AS product_name " +
                 "FROM DB2024_Review R INNER JOIN DB2024_Mealkit M ON R.mealkit_id = M.mealkit_id " +
@@ -126,7 +126,7 @@ public class PddetailController {
             if (rs.next() && rs.getInt(1) > 0) {
                 System.out.println("이미 장바구니에 있는 상품입니다.");
                 // 상품 목록으로 돌아가는 코드
-                Pdlistcontroller.displayProductList(memberId);
+                Pdlistcontroller.showProductList(memberId);
             } else {
                 insertStmt.setInt(1, PDid);
                 insertStmt.setInt(2, memberId);
@@ -158,7 +158,7 @@ public class PddetailController {
             if (rs.next() && rs.getInt(1) > 0) {
                 System.out.println("이미 북마크에 있는 상품입니다.");
                 // 상품 목록으로 돌아가는 코드
-                Pdlistcontroller.displayProductList(memberId);
+                Pdlistcontroller.showProductList(memberId);
             } else {
                 insertStmt.setInt(1, PDid);
                 insertStmt.setInt(2, memberId);
