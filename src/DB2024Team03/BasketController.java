@@ -55,7 +55,7 @@ public class BasketController {
             statement.setInt(2, mealkitId);
 
             try {
-                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Bookmark" )) {
+                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Bookmark")) {
                     statement.executeUpdate();
                     System.out.print("상품이 제거되었습니다.\n");
                     return;
