@@ -135,12 +135,12 @@ public class Main {
 									System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
 
 								} catch (SQLException e) {
-                                    //throw new RuntimeException(e);
+									//throw new RuntimeException(e);
 									if (conn != null){
 										conn.rollback();
 									}
 									e.printStackTrace();
-                                } finally {
+								} finally {
 									if(conn != null){
 										conn.setAutoCommit(true);
 									}
@@ -156,16 +156,10 @@ public class Main {
 							}
 
 							else if(basketselect == 3){
-								//장바구니에 상품이 존재하는지 확인
-								int itemNum = UtilController.checkItemNum(member.getId(), "DB2024_Basket");
-								if(itemNum > 0){
 									//제거하고 싶은 상품 mealkitId 입력받기
 									System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
 									int mealkitId = sc.nextInt();
 									BasketController.deleteBasketItem(member.getId(), mealkitId);
-								}
-								else System.out.println("장바구니가 비어있습니다.");
-
 							}
 
 
