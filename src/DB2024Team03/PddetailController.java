@@ -102,7 +102,7 @@ public class PddetailController {
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================해당 상품 리뷰==================");
             try {
-                if(UtilController.checkItemNum(0, "DB2024_Review", conn) > 0){
+                if(UtilController.checkItemNum(1, "DB2024_Review", conn) > 0){
                     ResultSet rs = pstmt.executeQuery();
                     while (rs.next()) {
                         String productName = rs.getString("product_name");
