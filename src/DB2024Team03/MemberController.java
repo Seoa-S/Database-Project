@@ -1,8 +1,10 @@
 package DB2024Team03;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class MemberController {
+	Scanner sc = new Scanner(System.in);
 
 	//로그인 기능 - 로그인 성공시 MemberDTO에 member정보 담아서 return
 	public MemberDTO login(String id, String pw) {
@@ -110,4 +112,44 @@ public class MemberController {
 	}
 
 
+	//회원의 주소 변경
+	public void changeAdd(MemberDTO member) {
+		System.out.print("변경할 주소를 입력하세요 >> ");
+		String add = sc.nextLine();
+		//사용자의 주소를 변경하는 UPDATE SQL문
+		String changeAddress = "UPDATE DB2024_Member SET address = ? WHERE member_id = ?";
+
+		try(
+				//db와 연결
+				Connection conn = DBconnect.getConnection();
+				//SQL 문장을 실행하기 위해 preparedStatement 객체 생성
+				PreparedStatement statement = conn.prepareStatement(changeAddress);
+		) {
+			//transaction 시작
+			conn.setAutoCommit(false);
+
+			//SQL문에 ?매개변수에 대한 값 정하기
+			statement.setString(1, add);
+			statement.setInt(2, member.getId());
+
+			try{
+				//SQL 문 실행
+				statement.executeUpdate();
+				//MemberDTO의 주소 정보 변경
+				member.setAddress(add);
+				System.out.println("주소 수정이 완료되었습니다.");
+				//트랜잭션 커밋
+				conn.commit();
+			} catch (SQLException e) {
+				//에러가 생기면 트랜잭션 롤백
+				conn.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				// AutoCommit true로 설정
+				conn.setAutoCommit(true);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		Scanner sc = new Scanner(System.in);
-		MemberController con = new MemberController();
+		MemberController Mcon = new MemberController();
 		MemberDTO member;
 		
 		while(true) {
@@ -30,7 +30,7 @@ public class Main {
 				String pw = sc.nextLine();
 
 				//memberDTO에 memberController의 login 메서드에 id,pw 전달 후 return된 member객체 저장
-				member = con.login(id, pw);
+				member = Mcon.login(id, pw);
 
 				//로그인 성공 (만약 DTO의 값이 null이면 해당 회원의 정보가 없다는 뜻)
 				if(member != null) {
@@ -54,7 +54,7 @@ public class Main {
 								System.out.println("========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
-								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]메인페이지 >> ");
+								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]내 정보 수정 [5]메인페이지 >> ");
 
 								int myselect = sc.nextInt();
 
@@ -92,6 +92,9 @@ public class Main {
 										OrdersController.displayOrdersList(member.getId(), sc);
 										break;
 									case 4:
+										Mcon.changeAdd(member);
+										break;
+									case 5:
 										keepGoing = false; // Exit 마이페이지 loop
 										break;
 								}
@@ -164,6 +167,7 @@ public class Main {
 						else if (mainselect == 4) {
 							//memberDTO null로 바꾸기
 							member = null;
+							System.out.println("로그아웃 되었습니다.");
 							break;
 						}
 						else
@@ -181,7 +185,7 @@ public class Main {
 					id = sc.nextLine();
 					//중복되는 회원이 있는지 확인
 					// MemberController의 MemberDuplicate 메소드에 id 매개변수로 넣어서 실행
-					if(!con.MemberDuplicate(id)){
+					if(!Mcon.MemberDuplicate(id)){
 						//중복되는 회원이 없다면
 						System.out.println("사용 가능한 아이디입니다.");
 						break;
@@ -198,7 +202,7 @@ public class Main {
 				String addr = sc.nextLine();
 
 				//id, pw, 이름, 주소 입력받아서 signup 메소드에 전달
-				con.signup(id, pw, name, addr);
+				Mcon.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {
 				//종료하기 버튼 선택 시 db 종료
