@@ -43,7 +43,7 @@ public class PddetailController {
 
                 }
 
-                System.out.print("[1]장바구니 [2]북마크 [3]리뷰목록 [4]상품 목록  >> ");
+                System.out.print("[1]장바구니 추가 [2]북마크 추가 [3]리뷰목록 [4]상품 목록  >> ");
                 int mselect = sc.nextInt();
                 // 장바구니에 추가
                 if (mselect == 1) {
