@@ -73,18 +73,23 @@ public class BasketController {
              PreparedStatement statement = conn.prepareStatement(deleteItem);
         ){
 
+
             statement.setInt(1, id);
             statement.setInt(2, mealkitId);
 
             try {
-                statement.executeUpdate();
+                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Bookmark" )) {
+                    statement.executeUpdate();
+                    System.out.print("상품이 제거되었습니다.\n");
+                    return;
+                }
 
-                System.out.print("상품이 제거되었습니다.\n");
-                return;
+                else {
+                    System.out.print("해당 상품ID가 장바구니에 존재하지 않습니다..\n");
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -4,12 +4,14 @@ import java.util.Date;
 
 public class ReviewDTO {
     private int reviewId;
+    private int productId;
     private String productName;
     private String content;
     private Date date;
 
-    public ReviewDTO(int reviewId, String productName, String content, Date date) {
+    public ReviewDTO(int reviewId, int productId, String productName, String content, Date date) {
         this.reviewId = reviewId;
+        this.productId = productId;
         this.productName = productName;
         this.content = content;
         this.date = date;
@@ -21,6 +23,14 @@ public class ReviewDTO {
 
     public void setReviewId(int reviewId) {
         this.reviewId = reviewId;
+    }
+
+    public int getProductId() {  // Getter for the product ID
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {

@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		Scanner sc = new Scanner(System.in);
-		MemberController con = new MemberController();
+		MemberController Mcon = new MemberController();
 		MemberDTO member;
 		
 		while(true) {
@@ -29,21 +29,21 @@ public class Main {
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
-				//memberDTO에 현재 로그인한 회원정보 넣기
-				member = con.login(id, pw);
-				
-				//로그인 성공
+				//memberDTO에 memberController의 login 메서드에 id,pw 전달 후 return된 member객체 저장
+				member = Mcon.login(id, pw);
+
+				//로그인 성공 (만약 DTO의 값이 null이면 해당 회원의 정보가 없다는 뜻)
 				if(member != null) {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
 						System.out.println("==================자취생을 위한 밀키트 쇼핑몰==================");
-						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 >> ");
+						System.out.print("[1]상품목록 [2]마이페이지 [3]장바구니 보러가기 [4]로그아웃 >> ");
 						
 						int mainselect = sc.nextInt();
 
 						// 1. 상품목록
 						if (mainselect == 1) {
-							Pdlistcontroller.displayProductList(member.getId());
+							Pdlistcontroller.showProductList(member.getId());
 
 						}
 
@@ -54,7 +54,7 @@ public class Main {
 								System.out.println("========================마이페이지=========================");
 								System.out.println(member.getName());
 								System.out.println(member.getAddress());
-								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]메인페이지 >> ");
+								System.out.print("[1]북마크 [2]작성했던 리뷰 목록 [3]주문내역 [4]내 정보 수정 [5]메인페이지 >> ");
 
 								int myselect = sc.nextInt();
 
@@ -62,7 +62,7 @@ public class Main {
 									case 1:
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
-										BookmarkController.displayBookmarkList(member.getId());
+										BookmarkController.showBookmarkList(member.getId());
 										System.out.print("[1]북마크 제거 [2]마이페이지 >> ");
 
 										int bookmarkselect = sc.nextInt();
@@ -80,18 +80,33 @@ public class Main {
 										break;
 									case 2:
 										// 작성했던 리뷰 목록
+										System.out.print("=====================작성했던 리뷰 목록======================");
 										ReviewController reviewController = new ReviewController();
-										reviewController.displayMemberReviews(member.getId());
-										if (reviewController.promptReturnToMyPage(sc)) {
-											keepGoing = true; // Maintain loop in MyPage if user inputs 'y'
+										reviewController.showMemberReviews(member.getId());
+										System.out.print("[1]리뷰 제거 [2]마이페이지 >> ");
+
+										int reviewselect = sc.nextInt();
+
+										if (reviewselect == 1){
+											System.out.print("제거하고 싶은 리뷰의 상품ID를 입력해주세요 >>");
+											int MealkitId = sc.nextInt();
+											reviewController.deleteReview(member.getId(), MealkitId);
 										}
+										else if(reviewselect == 2){
+											continue;
+										}
+										else System.out.println("잘못 입력하셨습니다.");
+
 										break;
 									case 3:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
-										OrdersController.displayOrdersList(member.getId(), sc);
+										OrdersController.showOrdersList(member.getId(), sc);
 										break;
 									case 4:
+										Mcon.changeAdd(member);
+										break;
+									case 5:
 										keepGoing = false; // Exit 마이페이지 loop
 										break;
 								}
@@ -127,7 +142,7 @@ public class Main {
 									e.printStackTrace();
                                 } finally {
 									if(conn != null){
-										conn.close();
+										conn.setAutoCommit(true);
 									}
 								}
 
@@ -136,7 +151,7 @@ public class Main {
 
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
-								Pdlistcontroller.displayProductList(member.getId());
+								Pdlistcontroller.showProductList(member.getId());
 
 							}
 
@@ -160,6 +175,15 @@ public class Main {
 								System.out.println("잘못 입력하셨습니다.");
 
 						}
+						//로그아웃
+						else if (mainselect == 4) {
+							//memberDTO null로 바꾸기
+							member = null;
+							System.out.println("로그아웃 되었습니다.");
+							break;
+						}
+						else
+							System.out.println("잘못된 번호를 입력하셨습니다.");
 					}
 				}
 			}
@@ -167,11 +191,13 @@ public class Main {
 				//회원가입
 				sc.nextLine();
 				String id;
+				//중복되는 회원이 없을 때 까지 while문으로 id 입력받기
 				while(true){
 					System.out.print("아이디 : ");
 					id = sc.nextLine();
 					//중복되는 회원이 있는지 확인
-					if(!con.MemberDuplicate(id)){
+					// MemberController의 MemberDuplicate 메소드에 id 매개변수로 넣어서 실행
+					if(!Mcon.MemberDuplicate(id)){
 						//중복되는 회원이 없다면
 						System.out.println("사용 가능한 아이디입니다.");
 						break;
@@ -181,19 +207,21 @@ public class Main {
 				}
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
-				//TODO : 회원 중복확인
+
 				System.out.print("본인이름 : ");
 				String name = sc.nextLine();
 				System.out.print("주소 : ");
 				String addr = sc.nextLine();
 
-				con.signup(id, pw, name, addr);
+				//id, pw, 이름, 주소 입력받아서 signup 메소드에 전달
+				Mcon.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {
+				//종료하기 버튼 선택 시 db 종료
 				DBconnect.closeConnection();
 				break;
 			}
-			else System.out.println("올바르지 않은 입력입니다.");
+			else {System.out.println("올바르지 않은 입력입니다.");}
 		}
 	}
 }

@@ -3,7 +3,7 @@ package DB2024Team03;
 import java.sql.*;
 
 public class BookmarkController {
-    public static void displayBookmarkList(int member_id){
+    public static void showBookmarkList(int member_id){
         String bookmarkquery = "SELECT production_name, mealkit_id FROM DB2024_Bookmarklist_view WHERE member_id = ?";
         try (
                 Connection conn = DBconnect.getConnection();
@@ -38,10 +38,18 @@ public class BookmarkController {
             statement.setInt(2, MealkitId);
 
             try {
-                statement.executeUpdate();
+                if (UtilController.checkIdExist(MealkitId, id, "DB2024_Bookmark" )) {
+                    statement.executeUpdate();
 
-                System.out.print("상품이 제거되었습니다.\n");
-                return;
+                    System.out.print("상품이 제거되었습니다.\n");
+                    return;
+                }
+
+                else {
+                    System.out.print("해당 상품ID 북마크 목록에 존재하지 않습니다..\n");
+                }
+
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
