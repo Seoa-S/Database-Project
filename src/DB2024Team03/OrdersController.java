@@ -27,19 +27,19 @@ public class OrdersController {
             }
 
             System.out.print("[1]리뷰하기 [2]마이페이지로 돌아가기 >> ");
-            int action = sc.nextInt();
-            if (action == 1) {
+            int action = sc.nextInt(); // 사용자 선택 입력 받기
+            if (action == 1) { // 리뷰 작성 선택 시
                 System.out.print("리뷰할 상품 ID 입력 >> ");
-                int productId = sc.nextInt();
-                sc.nextLine();
-                ReviewController reviewController = new ReviewController();
-                reviewController.showReview(productId);
+                int productId = sc.nextInt(); // 리뷰할 상품 ID 입력 받기
+                sc.nextLine(); // 입력 버퍼 클리어
+                ReviewController reviewController = new ReviewController(); // 리뷰 컨트롤러 객체 생성
+                reviewController.showReview(productId); // 선택한 상품의 상세 정보 보여주기
                 System.out.println("리뷰를 작성하세요 (엔터를 누르면 작성 완료): ");
-                String reviewContent = sc.nextLine();
-                reviewController.createReview(member_id, productId, reviewContent, sc);
+                String reviewContent = sc.nextLine(); // 리뷰 내용 입력 받기
+                reviewController.createReview(member_id, productId, reviewContent, sc); // 리뷰 생성
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // 예외 발생 시 런타임 예외로 전환
         }
     }
 }

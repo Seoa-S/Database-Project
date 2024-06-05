@@ -87,7 +87,7 @@ public class PddetailController {
     }
 
     // 해당 상품(PDid)에 대한 리뷰 출력하는 코드
-    private static void showReviews(int PDid) exit
+    private static void showReviews(int PDid)
     {
         // 해당리뷰목록 쿼리
         String query2 = "SELECT MM.id AS member_id, R.content, R.date, M.name AS product_name " +
