@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="5f7f9af8-2390-47a0-911f-fcdad240da92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DB2024Team03/BasketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/BasketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB2024Team03/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DB2024Team03/Main.java" afterDir="false" />
+    <list default="true" id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="save">
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BasketController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/BasketController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Database-Project/DB2024Team03/Main.class" afterDir="false" />
     </list>
-=======
-    <list default="true" id="9d80ef0c-c4a7-4c89-b155-d3ac51a392ea" name="Changes" comment="save" />
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,17 +98,7 @@
       <created>1716803378580</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-<<<<<<< Updated upstream
-      <updated>1716834167631</updated>
-      <workItem from="1716834168493" duration="52000" />
-      <workItem from="1716834232841" duration="7706000" />
-      <workItem from="1717395651029" duration="1696000" />
-      <workItem from="1717411832929" duration="1567000" />
-      <workItem from="1717516472389" duration="944000" />
-      <workItem from="1717517517992" duration="1071000" />
-=======
       <updated>1716803378580</updated>
->>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="save">
       <option name="closed" value="true" />
