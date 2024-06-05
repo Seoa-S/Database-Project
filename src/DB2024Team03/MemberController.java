@@ -38,46 +38,35 @@ public class MemberController {
 
 	
 	public void signup(String id, String pw, String name, String address) {
-		String maxIdQuery = "SELECT MAX(member_id) AS id FROM DB2024_Member";
-		String insertquery = "INSERT INTO DB2024_Member (member_id, id, password, member_name, address) VALUES (?, ?, ?, ?, ?)";
+		String insertQuery = "INSERT INTO DB2024_Member (id, password, member_name, address) VALUES (?, ?, ?, ?)";
 
 		try(
 				//db와 연결
 				Connection connection = DBconnect.getConnection();
-				PreparedStatement maxIdstatement = connection.prepareStatement(maxIdQuery);
-				PreparedStatement insertstatement = connection.prepareStatement(insertquery)
+				PreparedStatement insertStatement = connection.prepareStatement(insertQuery)
 		){
 			//transaction 시작
 			connection.setAutoCommit(false);
-			
-			int MaxMemberId = 0;
-	        try (ResultSet maxIdresult = maxIdstatement.executeQuery()) {
-	            if (maxIdresult.next()) {
-	                MaxMemberId = maxIdresult.getInt("id");
-	            }
-	        }
 
-	        // MaxMemberId 값이 0이라면 쿼리 결과가 비어있는 경우이므로,
-	        // 회원 아이디를 1로 설정해줍니다.
-	        MaxMemberId = MaxMemberId + 1;
+			insertStatement.setString(1, id);
+			insertStatement.setString(2, pw);
+			insertStatement.setString(3, name);
+			insertStatement.setString(4, address);
 
-	        insertstatement.setInt(1, MaxMemberId);
-	        insertstatement.setString(2, id);
-	        insertstatement.setString(3, pw);
-	        insertstatement.setString(4, name);
-	        insertstatement.setString(5, address);
-	        
-            try{
-            	insertstatement.executeUpdate();
+			try{
+				insertStatement.executeUpdate();
 				//트랜잭션 커밋
 				connection.commit();
-                System.out.println("회원가입 성공");
-            } catch(SQLException e) {
-        		e.printStackTrace();
+				System.out.println("회원가입 성공");
+			} catch(SQLException e) {
+				e.printStackTrace();
 				// 트랜잭션 롤백
 				connection.rollback();
-        		System.out.println("회원가입에 실패했습니다.");
-        	}
+				System.out.println("회원가입에 실패했습니다.");
+			}
+			//AutoCommit true로 설정
+			connection.setAutoCommit(true);
+
 		} catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("데이터베이스 오류가 발생했습니다.");
@@ -96,7 +85,7 @@ public class MemberController {
 			statement.setString(1, id);
 
 			try(ResultSet resultSet = statement.executeQuery()){
-				return resultSet.next();	//회원이 존재하면 true, 없으면 false
+				return resultSet.next();   //회원이 존재하면 true, 없으면 false
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
