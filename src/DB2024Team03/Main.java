@@ -29,10 +29,10 @@ public class Main {
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
-				//memberDTO에 현재 로그인한 회원정보 넣기
+				//memberDTO에 memberController의 login 메서드에 id,pw 전달 후 return된 member객체 저장
 				member = con.login(id, pw);
-				
-				//로그인 성공
+
+				//로그인 성공 (만약 DTO의 값이 null이면 해당 회원의 정보가 없다는 뜻)
 				if(member != null) {
 					System.out.println(member.getName() + "님 환영합니다!");
 					while(true) {
@@ -167,10 +167,12 @@ public class Main {
 				//회원가입
 				sc.nextLine();
 				String id;
+				//중복되는 회원이 없을 때 까지 while문으로 id 입력받기
 				while(true){
 					System.out.print("아이디 : ");
 					id = sc.nextLine();
 					//중복되는 회원이 있는지 확인
+					// MemberController의 MemberDuplicate 메소드에 id 매개변수로 넣어서 실행
 					if(!con.MemberDuplicate(id)){
 						//중복되는 회원이 없다면
 						System.out.println("사용 가능한 아이디입니다.");
@@ -187,9 +189,11 @@ public class Main {
 				System.out.print("주소 : ");
 				String addr = sc.nextLine();
 
+				//id, pw, 이름, 주소 입력받아서 signup 메소드에 전달
 				con.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {
+				//종료하기 버튼 선택 시 db 종료
 				DBconnect.closeConnection();
 				break;
 			}
