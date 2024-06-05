@@ -27,7 +27,7 @@ public class Pdlistcontroller{
             int mselect =sc.nextInt();
             //상품 상세로 이동
             if (mselect==1){
-                Pddetail.displayProductdetail(memberId);
+                PddetailController.displayProductdetail(memberId);
             }
             //메인페이지로 이동
             else if (mselect==2) {
