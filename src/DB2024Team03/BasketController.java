@@ -42,35 +42,58 @@ public class BasketController {
         }
     }
 
-    public static void deleteBasketItem(int id, int mealkitId){
+    public static void deleteBasketItem(int id, int mealkitId) {
+
         String deleteItem = "DELETE FROM DB2024_Basket WHERE member_id=? AND mealkit_id=?";
 
-        try (// DB 연결을 위한 정보를 설정
-             Connection conn = DBconnect.getConnection();
-             PreparedStatement statement = conn.prepareStatement(deleteItem);
-        ){
+        Connection conn = null;
+        PreparedStatement statement = null;
 
+        try {
+            conn = DBconnect.getConnection();
+            conn.setAutoCommit(false); // 트랜잭션 시작
 
+            statement = conn.prepareStatement(deleteItem);
             statement.setInt(1, id);
             statement.setInt(2, mealkitId);
 
             try {
-                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Bookmark")) {
+                if (UtilController.checkIdExist(mealkitId, id, "DB2024_Basket", conn)) {
+
                     statement.executeUpdate();
                     System.out.print("상품이 제거되었습니다.\n");
-                    return;
-                }
-
-                else {
+                    conn.commit(); // 변경사항 커밋
+                } else {
                     System.out.print("해당 상품ID가 장바구니에 존재하지 않습니다.\n");
+                    conn.commit(); // 트랜잭션 완료 (실제로 삭제할 항목이 없는 경우에도)
                 }
             } catch (SQLException e) {
+                conn.rollback(); // 예외 발생 시 롤백
                 throw new RuntimeException(e);
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.setAutoCommit(true); // 자동 커밋 모드 재설정
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        conn.close(); // 연결 닫기
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                if (statement != null) {
+                    try {
+                        statement.close(); // PreparedStatement 닫기
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static void updateOrderList(int id, Connection conn){
