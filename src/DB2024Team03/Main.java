@@ -80,11 +80,23 @@ public class Main {
 										break;
 									case 2:
 										// 작성했던 리뷰 목록
+										System.out.print("=====================작성했던 리뷰 목록======================");
 										ReviewController reviewController = new ReviewController();
 										reviewController.displayMemberReviews(member.getId());
-										if (reviewController.promptReturnToMyPage(sc)) {
-											keepGoing = true; // Maintain loop in MyPage if user inputs 'y'
+										System.out.print("[1]리뷰 제거 [2]마이페이지 >> ");
+
+										int reviewselect = sc.nextInt();
+
+										if (reviewselect == 1){
+											System.out.print("제거하고 싶은 리뷰의 상품ID를 입력해주세요 >>");
+											int MealkitId = sc.nextInt();
+											reviewController.deleteReview(member.getId(), MealkitId);
 										}
+										else if(reviewselect == 2){
+											continue;
+										}
+										else System.out.println("잘못 입력하셨습니다.");
+
 										break;
 									case 3:
 										// 주문 내역

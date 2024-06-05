@@ -31,7 +31,6 @@ public class ReviewController {
         if (reviews.isEmpty()) {
             System.out.println("작성된 리뷰가 없습니다.");
         } else {
-            System.out.print("=====================작성했던 리뷰 목록======================");
             for (ReviewDTO review : reviews) {
                 System.out.println("\n[상품이름]" + review.getProductName());
                 System.out.println("[리뷰내용]" + review.getContent());
@@ -87,6 +86,31 @@ public class ReviewController {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Prints the stack trace for debugging
+        }
+    }
+
+    public void deleteReview(int id, int MealkitId) {
+        String deleteReview = "DELETE FROM DB2024_Review WHERE member_id=? AND mealkit_id=?";
+
+        try (// DB 연결을 위한 정보를 설정
+             Connection conn = DBconnect.getConnection();
+             PreparedStatement statement = conn.prepareStatement(deleteReview);
+        ){
+
+            statement.setInt(1, id);
+            statement.setInt(2, MealkitId);
+
+            try {
+                statement.executeUpdate();
+
+                System.out.print("리뷰가 제거되었습니다.\n");
+                return;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
