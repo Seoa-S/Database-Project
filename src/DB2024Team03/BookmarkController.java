@@ -80,27 +80,4 @@ public class BookmarkController {
         }
     }
 
-    // 연결을 재사용하는 checkIdExist 메서드
-    public static boolean checkIdExist(int itemId, int memberId, String tableName, Connection conn) {
-        String checkIdExist = "SELECT mealkit_id FROM " + tableName + " WHERE member_id = ?";
-
-        try (PreparedStatement statement = conn.prepareStatement(checkIdExist)) {
-            statement.setInt(1, memberId);
-
-            try (ResultSet rs = statement.executeQuery()) {
-                while (rs.next()) {
-                    int mealkit_id = rs.getInt("mealkit_id");
-                    if (mealkit_id == itemId) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
 }
