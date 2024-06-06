@@ -19,16 +19,16 @@ public class UtilController {
 
             try(ResultSet resultSet = statement.executeQuery()){ // SQL 쿼리를 실행하고, 그 결과를 ResultSet 객체로 받아온다.
                 // 상품 개수 받아오기
-                if (resultSet.next()){ // ResultSet에 다음 행이 존재한다면(즉, 쿼리의 결과가 존재한다면)
-                    return resultSet.getInt(1); // 첫 번째 열(여기서는 COUNT(*)의 결과)의 값을 int로 받아와서 반환합니다.
+                if (resultSet.next()){ // ResultSet에 다음 행이 존재한다면 즉, 쿼리의 결과가 존재한다면
+                    return resultSet.getInt(1); // 첫 번째 열 즉, 여기서는 COUNT(*)의 결과의 값을 int로 받아와서 반환한다.
                 }
             }
         } catch (SQLException e) {
-            // SQL 관련 예외가 발생하면, 런타임 예외로 전환하여 던집니다.
+            // SQL 관련 예외가 발생하면, 런타임 예외로 전환하여 던진다.
             throw new RuntimeException(e);
         }
 
-        return 0; // SQL 쿼리의 결과가 없거나 예외가 발생했을 때, 0을 반환합니다.
+        return 0; // SQL 쿼리의 결과가 없거나 예외가 발생했을 때, 0을 반환한다.
     }
 
     public static boolean checkIdExist(int itemId, int memberId, String tableName, Connection conn) {
