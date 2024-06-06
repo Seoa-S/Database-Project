@@ -9,7 +9,7 @@ public class Pdlistcontroller { // 클래스 선언
         // 상품 목록을 조회하는 쿼리
         String query = "SELECT * FROM DB2024_ProductWithBookmark_view";
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
-             PreparedStatement pstmt = conn.prepareStatement(query); // 준비된 문장 생성
+             PreparedStatement pstmt = conn.prepareStatement(query); //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
              ResultSet rs = pstmt.executeQuery()) { // 쿼리 실행 및 결과 집합 받기
 
             // 상품 목록 출력 헤더

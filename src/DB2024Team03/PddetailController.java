@@ -20,7 +20,7 @@ public class PddetailController { // 클래스 선언
                 "WHERE M.mealkit_id = ? GROUP BY M.mealkit_id";
 
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
-             PreparedStatement pstmt = conn.prepareStatement(query1)) { // 준비된 문장 생성
+             PreparedStatement pstmt = conn.prepareStatement(query1)) { //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
 
             pstmt.setInt(1, PDid); // 첫 번째 자리표시자(?)에 상품 ID(PDid)를 설정(입력받은 상품 ID를 쿼리에 설정)
             System.out.println("==================상품 상세==================");
@@ -94,7 +94,7 @@ public class PddetailController { // 클래스 선언
                 "WHERE R.mealkit_id = ?";
 
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
-             PreparedStatement pstmt = conn.prepareStatement(query2)) { // 준비된 문장 생성
+             PreparedStatement pstmt = conn.prepareStatement(query2)) { //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
 
             pstmt.setInt(1, PDid); // 입력받은 상품 ID를 쿼리에 설정
             System.out.println("==================해당 상품 리뷰==================");
@@ -108,6 +108,7 @@ public class PddetailController { // 클래스 선언
                         String content = rs.getString("content"); // 리뷰 내용 가져오기
                         String date = rs.getString("date"); // 작성 날짜 가져오기
                         String member_id = rs.getString("member_id"); // 작성자 ID 가져오기
+                        // 해당 상품에 대한 리뷰 출력
                         System.out.println("[상품이름] " + productName);
                         System.out.println("[리뷰내용] " + content);
                         System.out.println("[작성날짜] " + date);
@@ -132,8 +133,8 @@ public class PddetailController { // 클래스 선언
         String insertQuery = "INSERT INTO DB2024_Basket (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
-             PreparedStatement checkStmt = conn.prepareStatement(checkQuery); // 준비된 문장 생성(첫 번째 쿼리 준비)
-             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) { // 준비된 문장 생성 (두 번째 쿼리 준비)
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery); // //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성(첫 번째 쿼리 준비)
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) { // //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성(두 번째 쿼리 준비)
 
             conn.setAutoCommit(false); // 트랜잭션 시작 (자동 커밋 비활성화)
 
@@ -175,8 +176,8 @@ public class PddetailController { // 클래스 선언
         String insertQuery = "INSERT INTO DB2024_Bookmark (mealkit_id, member_id) VALUES (?, ?)";
 
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
-             PreparedStatement checkStmt = conn.prepareStatement(checkQuery); // 준비된 문장 생성
-             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) { // 준비된 문장 생성
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery); //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) { //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
 
             conn.setAutoCommit(false); // 트랜잭션 시작
 
