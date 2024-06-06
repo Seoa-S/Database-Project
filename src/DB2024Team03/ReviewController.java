@@ -65,7 +65,7 @@ public class ReviewController {
         String checkQuery = "SELECT COUNT(*) FROM DB2024_Review WHERE member_id = ? AND mealkit_id = ?"; // 기존 리뷰 존재 확인 쿼리
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
              PreparedStatement checkPstmt = conn.prepareStatement(checkQuery)) {
-
+            conn.setAutoCommit(false); // 자동 커밋 비활성화
             checkPstmt.setInt(1, memberId); // 매개변수로 받은 memberId 설정
             checkPstmt.setInt(2, mealkitId); // 매개변수로 받은 mealkitId 설정
             ResultSet rs = checkPstmt.executeQuery(); // 쿼리 실행
@@ -83,7 +83,6 @@ public class ReviewController {
             // 새로운 리뷰 삽입
             String insertQuery = "INSERT INTO DB2024_Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
             try (PreparedStatement insertPstmt = conn.prepareStatement(insertQuery)) {
-                conn.setAutoCommit(false); // 자동 커밋 비활성화
                 insertPstmt.setString(1, content); // 리뷰 내용 설정
                 insertPstmt.setInt(2, mealkitId); // mealkitId 설정
                 insertPstmt.setInt(3, memberId); // memberId 설정
