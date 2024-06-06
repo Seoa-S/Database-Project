@@ -31,22 +31,23 @@ public class UtilController {
         return 0;
     }
 
+    //피라미터로 가져온 itemId가 tableName의 테이블에 존재하는지 확인하여 존재하면 true, 존재하지 않으면 false를 반환하는 함수
     public static boolean checkIdExist(int itemId, int memberId, String tableName, Connection conn) {
         String checkIdExist = "SELECT mealkit_id FROM " + tableName + " WHERE member_id = ?";
 
         try (PreparedStatement statement = conn.prepareStatement(checkIdExist)) {
-            statement.setInt(1, memberId);
+            statement.setInt(1, memberId); //피라미터로 가져온 memberId를 sql문에 넣기
 
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    int mealkit_id = rs.getInt("mealkit_id");
-                    if (mealkit_id == itemId) {
-                        return true;
+                    int mealkit_id = rs.getInt("mealkit_id"); //mealkit_id 가져오기
+                    if (mealkit_id == itemId) { //가져온 mealkit_id와 입력받은 itemId가 일치하는 경우
+                        return true; //true 반환
                     }
                 }
-                return false;
+                return false; //모든 행에 대해 확인해봤지만 없을 경우 false 반환
             }
-        } catch (SQLException e) {
+        } catch (SQLException e) { //오류
             throw new RuntimeException(e);
         }
     }

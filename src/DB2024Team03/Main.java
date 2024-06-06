@@ -62,20 +62,20 @@ public class Main {
 									case 1:
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
-										BookmarkController.showBookmarkList(member.getId());
-										System.out.print("[1]북마크 제거 [2]마이페이지 >> ");
+										BookmarkController.showBookmarkList(member.getId()); //사용자의 북마크 목록 출력
+										System.out.print("[1]북마크 제거 [2]마이페이지 >> "); //북마크 관리 메뉴 제공
 
-										int bookmarkselect = sc.nextInt();
+										int bookmarkselect = sc.nextInt(); //입력 받기
 
 										if (bookmarkselect == 1){
 											System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-											int MealkitId = sc.nextInt();
-											BookmarkController.deleteBookmarkItem(member.getId(), MealkitId);
+											int MealkitId = sc.nextInt(); //제거를 원하는 상품 ID 입력받기
+											BookmarkController.deleteBookmarkItem(member.getId(), MealkitId); //해당 상품 ID의 상품을 북마크 목록에서 삭ㄱ제
 										}
 										else if(bookmarkselect == 2){
-											continue;
+											continue; //마이페이지로 돌아가기
 										}
-										else System.out.println("잘못 입력하셨습니다.");
+										else System.out.println("잘못 입력하셨습니다."); //잘못된 입력
 
 										break;
 									case 2:
@@ -101,7 +101,7 @@ public class Main {
 									case 3:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
-										OrdersController.showOrdersList(member.getId(), sc);
+										OrdersController.showOrdersList(member.getId(), sc); //사용자의 주문내역 출력
 										break;
 									case 4:
 										Mcon.changeAdd(member);
