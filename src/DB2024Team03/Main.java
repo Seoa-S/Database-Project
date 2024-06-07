@@ -118,12 +118,14 @@ public class Main {
 							BasketController.showBasketList(member.getId());
 							System.out.print("[1]모두 주문하기 [2]더 쇼핑하기 [3]상품 제거하기 [4]메인페이지 >> ");
 
-							int basketselect = sc.nextInt();
+							int basketselect = sc.nextInt(); //사용자 입력 받기
 
+							//'모두 주문하기'를 눌렀을 경우
 							if (basketselect == 1){
 
 								Connection conn = null;
 								try {
+									// 데이터베이스 연결 설정 및 트랜잭션 시작
 									conn = DBconnect.getConnection();
 									conn.setAutoCommit(false);
 
@@ -131,16 +133,17 @@ public class Main {
 									BasketController.removeItems(member.getId(), conn); //장바구니에 있던 물건들 없애기
 									BasketController.stockUpdate(member.getId(), conn);//재고 줄이기
 
-									conn.commit();
+									conn.commit();  // 트랜잭션 커밋
 									System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
 
 								} catch (SQLException e) {
-									//throw new RuntimeException(e);
+									//// 예외 발생 시 롤백 처리
 									if (conn != null){
 										conn.rollback();
 									}
 									e.printStackTrace();
 								} finally {
+									// 자동 커밋 모드 재설정
 									if(conn != null){
 										conn.setAutoCommit(true);
 									}
@@ -149,24 +152,27 @@ public class Main {
 
 							}
 
+							//'더 쇼핑하기'를 눌렀을 경우
 							else if(basketselect == 2){
 								//상품 리스트 화면으로 넘어가기
 								Pdlistcontroller.showProductList(member.getId());
 
 							}
 
+							//상품 제거하기를 눌렀을 경우
 							else if(basketselect == 3){
-									//제거하고 싶은 상품 mealkitId 입력받기
+									//제거하고 싶은 상품의 mealkitId 입력받기
 									System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
 									int mealkitId = sc.nextInt();
-									BasketController.deleteBasketItem(member.getId(), mealkitId);
+									BasketController.deleteBasketItem(member.getId(), mealkitId); //장바구니에서 해당 상품 제거
 							}
 
-
+							//메인페이지로 이동하기를 눌렀을 경우
 							else if (basketselect == 4){
 								//메인페이지로 이동
 								continue;
 							}
+							// 그 외의 번호를 눌렀을 경우
 							else
 								System.out.println("잘못 입력하셨습니다.");
 

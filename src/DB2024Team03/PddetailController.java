@@ -102,23 +102,25 @@ public class PddetailController {
             pstmt.setInt(1, PDid); // 상품 id를 sql문에 넣어줌
             System.out.println("==================해당 상품 리뷰==================");
             try {
-                if(UtilController.checkItemNum(1, "DB2024_Review", conn) > 0){
+                if(UtilController.checkItemNum(1, "DB2024_Review", conn) > 0){ //등록된 리뷰가 존재한다면 결과 조회
                     ResultSet rs = pstmt.executeQuery();
                     while (rs.next()) {
-                        String productName = rs.getString("product_name");
-                        String content = rs.getString("content");
-                        String date = rs.getString("date");
-                        String member_id = rs.getString("member_id");
-                        System.out.println("[상품이름]" + productName);
-                        System.out.println("[리뷰내용]" + content);
-                        System.out.println("[작성날짜]" + date);
-                        System.out.println("[작성자 ID]" + member_id);
-                        System.out.println();
+                        String productName = rs.getString("product_name"); // ResultSet에서 'product_name' 열의 값을 가져와 productName 변수에 저장
+                        String content = rs.getString("content"); // ResultSet에서 'content' 열의 값을 가져와 content 변수에 저장
+                        String date = rs.getString("date"); // ResultSet에서 'date' 열의 값을 가져와 date 변수에 저장
+                        String member_id = rs.getString("member_id"); // ResultSet에서 'member_id' 열의 값을 가져와 member_id 변수에 저장
+                        System.out.println("[상품이름]" + productName); // 제품 이름을 출력
+                        System.out.println("[리뷰내용]" + content); // 리뷰 내용을 출력
+                        System.out.println("[작성날짜]" + date); // 작성 날짜를 출력
+                        System.out.println("[작성자 ID]" + member_id); // 작성자 ID를 출력
+                        System.out.println(); // 각 리뷰의 끝에 빈 줄을 추가하여 가독성을 높인다.
                     }
-                } else
+
+                } else //등록된 리뷰가 존재하지 않을 때 사용자에게 알려주기
                     System.out.println("아직 등록된 리뷰가 없습니다.");
 
             } catch (SQLException e) {
+                // SQL 실행 중 발생한 예외를 런타임 예외로 전환하여 던진다.
                 throw new RuntimeException(e);
             }
 
