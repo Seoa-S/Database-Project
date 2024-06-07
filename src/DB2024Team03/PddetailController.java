@@ -117,6 +117,7 @@ public class PddetailController { // 클래스 선언
                     }
                 }
             } catch (SQLException e) { // SQL 예외 처리
+
                 throw new RuntimeException(e);
             }
 
