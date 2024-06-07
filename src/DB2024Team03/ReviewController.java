@@ -30,6 +30,7 @@ public class ReviewController {
     public void showMemberReviews(int memberId) {
         List<ReviewDTO> reviews = getMemberReviews(memberId); // 회원의 리뷰 리스트 가져오기
         if (reviews.isEmpty()) { // 리뷰가 없는 경우
+            System.out.println();
             System.out.println("작성된 리뷰가 없습니다.");
         } else { // 리뷰가 존재하는 경우 각 리뷰 출력
             for (ReviewDTO review : reviews) {
@@ -64,7 +65,7 @@ public class ReviewController {
         String checkQuery = "SELECT COUNT(*) FROM DB2024_Review WHERE member_id = ? AND mealkit_id = ?"; // 기존 리뷰 존재 확인 쿼리
         try (Connection conn = DBconnect.getConnection(); // 데이터베이스 연결
              PreparedStatement checkPstmt = conn.prepareStatement(checkQuery)) {
-
+            conn.setAutoCommit(false); // 자동 커밋 비활성화
             checkPstmt.setInt(1, memberId); // 매개변수로 받은 memberId 설정
             checkPstmt.setInt(2, mealkitId); // 매개변수로 받은 mealkitId 설정
             ResultSet rs = checkPstmt.executeQuery(); // 쿼리 실행
@@ -82,7 +83,6 @@ public class ReviewController {
             // 새로운 리뷰 삽입
             String insertQuery = "INSERT INTO DB2024_Review (content, date, mealkit_id, member_id) VALUES (?, CURRENT_DATE(), ?, ?)";
             try (PreparedStatement insertPstmt = conn.prepareStatement(insertQuery)) {
-                conn.setAutoCommit(false); // 자동 커밋 비활성화
                 insertPstmt.setString(1, content); // 리뷰 내용 설정
                 insertPstmt.setInt(2, mealkitId); // mealkitId 설정
                 insertPstmt.setInt(3, memberId); // memberId 설정
@@ -101,7 +101,7 @@ public class ReviewController {
         }
     }
 
-
+    //사용자의 리뷰 목록에서 원하는 상품 ID에 해당하는 리뷰를 삭제하는 함수
     public void deleteReview(int id, int mealkitId) {
         String deleteReview = "DELETE FROM DB2024_Review WHERE member_id=? AND mealkit_id=?";
 
@@ -109,20 +109,21 @@ public class ReviewController {
         PreparedStatement statement = null;
 
         try {
-            conn = DBconnect.getConnection();
+            conn = DBconnect.getConnection(); //데이터베이스 연결
             conn.setAutoCommit(false); // 트랜잭션 시작
 
-            statement = conn.prepareStatement(deleteReview);
-            statement.setInt(1, id);
-            statement.setInt(2, mealkitId);
+            statement = conn.prepareStatement(deleteReview);  //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
+            statement.setInt(1, id); //피라미터로 받은 id를 sql문에 넣기
+            statement.setInt(2, mealkitId); //피라미터로 받은 mealkitId를 sql문에 넣기
 
             try {
+                //DB2024_Review 데이터에 입력한 상품 ID가 존재하는 경우
                 if (UtilController.checkIdExist(mealkitId, id, "DB2024_Review", conn)) {
-                    statement.executeUpdate();
-                    System.out.print("리뷰가 제거되었습니다.\n");
+                    statement.executeUpdate(); //SQL 쿼리문 실행 (리뷰 목록에서 삭제)
+                    System.out.print("리뷰가 제거되었습니다.\n"); //안내문 출력
                     conn.commit(); // 변경사항 커밋
-                } else {
-                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다.\n");
+                } else {  //DB2024_Review 데이터에 입력한 상품 ID가 존재하지 않는 경우
+                    System.out.print("해당 상품ID의 리뷰가 존재하지 않습니다.\n"); //안내문 출력
                     conn.commit(); // 트랜잭션 완료 (실제로 삭제할 항목이 없는 경우에도)
                 }
             } catch (SQLException e) {
@@ -132,24 +133,24 @@ public class ReviewController {
                 if (conn != null) {
                     try {
                         conn.setAutoCommit(true); // 자동 커밋 모드 재설정
-                    } catch (SQLException e) {
+                    } catch (SQLException e) { //예외처리
                         throw new RuntimeException(e);
                     }
                     try {
                         conn.close(); // 연결 닫기
-                    } catch (SQLException e) {
+                    } catch (SQLException e) { //예외처리
                         throw new RuntimeException(e);
                     }
                 }
                 if (statement != null) {
                     try {
                         statement.close(); // PreparedStatement 닫기
-                    } catch (SQLException e) {
+                    } catch (SQLException e) { //예외처리
                         throw new RuntimeException(e);
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException e) { //예외처리
             throw new RuntimeException(e);
         }
     }

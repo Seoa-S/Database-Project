@@ -24,12 +24,13 @@ public class Main {
 			if(select == 1) {
 				//로그인
 				sc.nextLine();
+				//사용자에게 아이디, 비밀번호 입력받기
 				System.out.print("아이디 : ");
 				String id = sc.nextLine();
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
-				//memberDTO에 memberController의 login 메서드에 id,pw 전달 후 return된 member객체 저장
+				//memberDTO에 memberController의 login 메서드에 입력받은 id,pw 전달 후 return된 member객체 저장
 				member = Mcon.login(id, pw);
 
 				//로그인 성공 (만약 DTO의 값이 null이면 해당 회원의 정보가 없다는 뜻)
@@ -62,20 +63,20 @@ public class Main {
 									case 1:
 										// 북마크
 										System.out.println("================나의 북마크 목록=================");
-										BookmarkController.showBookmarkList(member.getId());
-										System.out.print("[1]북마크 제거 [2]마이페이지 >> ");
+										BookmarkController.showBookmarkList(member.getId()); //사용자의 북마크 목록 출력
+										System.out.print("[1]북마크 제거 [2]마이페이지 >> "); //북마크 관리 메뉴 제공
 
-										int bookmarkselect = sc.nextInt();
+										int bookmarkselect = sc.nextInt(); //입력 받기
 
 										if (bookmarkselect == 1){
 											System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-											int MealkitId = sc.nextInt();
-											BookmarkController.deleteBookmarkItem(member.getId(), MealkitId);
+											int MealkitId = sc.nextInt(); //제거를 원하는 상품 ID 입력받기
+											BookmarkController.deleteBookmarkItem(member.getId(), MealkitId); //해당 상품 ID의 상품을 북마크 목록에서 삭ㄱ제
 										}
 										else if(bookmarkselect == 2){
-											continue;
+											continue; //마이페이지로 돌아가기
 										}
-										else System.out.println("잘못 입력하셨습니다.");
+										else System.out.println("잘못 입력하셨습니다."); //잘못된 입력
 
 										break;
 									case 2:
@@ -101,7 +102,7 @@ public class Main {
 									case 3:
 										// 주문 내역
 										System.out.println("================나의 주문내역=================");
-										OrdersController.showOrdersList(member.getId(), sc);
+										OrdersController.showOrdersList(member.getId(), sc); //사용자의 주문내역 출력
 										break;
 									case 4:
 										Mcon.changeAdd(member);
@@ -198,7 +199,8 @@ public class Main {
 					System.out.print("아이디 : ");
 					id = sc.nextLine();
 					//중복되는 회원이 있는지 확인
-					// MemberController의 MemberDuplicate 메소드에 id 매개변수로 넣어서 실행
+					// MemberController의 MemberDuplicate 메소드에 입력받은 id를 매개변수로 넣어서 실행
+					//return 값이 true면 중복, false면 사용 가능한 아이디
 					if(!Mcon.MemberDuplicate(id)){
 						//중복되는 회원이 없다면
 						System.out.println("사용 가능한 아이디입니다.");
@@ -207,6 +209,7 @@ public class Main {
 						System.out.println("이미 존재하는 id입니다.");
 					}
 				}
+				//회원가입할 비밀번호, 이름, 주소 사용자에게 입력받기
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
@@ -215,7 +218,7 @@ public class Main {
 				System.out.print("주소 : ");
 				String addr = sc.nextLine();
 
-				//id, pw, 이름, 주소 입력받아서 signup 메소드에 전달
+				//입력받은 id, pw, 이름, 주소 signup 메소드에 전달
 				Mcon.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {

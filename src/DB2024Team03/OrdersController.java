@@ -4,26 +4,28 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class OrdersController {
+    //사용자의 주문내역 목록을 보여주고 리뷰작성을 하거나 마이페이지로 돌아가는 메뉴 제공
     public static void showOrdersList(int member_id, Scanner sc) {
         String ordersquery = "SELECT M.name, O.orderdate, M.price, O.mealkit_id " +
                 "FROM DB2024_Orders O INNER JOIN DB2024_Mealkit M ON O.mealkit_id = M.mealkit_id " +
                 "WHERE O.member_id = ?";
         try (
-                Connection conn = DBconnect.getConnection();
+                Connection conn = DBconnect.getConnection(); //데이터베이스 연결
+                //SQL 문장을 실행하기 위해 PreparedStatement 객체 생성
                 PreparedStatement statement = conn.prepareStatement(ordersquery)) {
 
-            statement.setInt(1, member_id);
+            statement.setInt(1, member_id); //피라미터로 가져온 member_id를 sql문에 넣기
 
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = statement.executeQuery(); // 쿼리 실행 및 결과 집합 받기
 
             System.out.println("[주문내역]");
             System.out.println("[상품 ID]\t[상품 이름]\t\t[가격]\t[주문 날짜]");
             while (rs.next()) {
                 System.out.printf("%d\t\t\t%s\t\t%d\t%s%n",
-                        rs.getInt("mealkit_id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),  // Assuming you want to display the price
-                        rs.getDate("orderdate"));
+                        rs.getInt("mealkit_id"), //mealkit_id 가져오기
+                        rs.getString("name"), //name 가져오기
+                        rs.getInt("price"),  //price 가져오기
+                        rs.getDate("orderdate")); //orderdate 가져오기
             }
 
             System.out.print("[1]리뷰하기 [2]마이페이지로 돌아가기 >> ");
