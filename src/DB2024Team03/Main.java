@@ -24,12 +24,13 @@ public class Main {
 			if(select == 1) {
 				//로그인
 				sc.nextLine();
+				//사용자에게 아이디, 비밀번호 입력받기
 				System.out.print("아이디 : ");
 				String id = sc.nextLine();
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
-				//memberDTO에 memberController의 login 메서드에 id,pw 전달 후 return된 member객체 저장
+				//memberDTO에 memberController의 login 메서드에 입력받은 id,pw 전달 후 return된 member객체 저장
 				member = Mcon.login(id, pw);
 
 				//로그인 성공 (만약 DTO의 값이 null이면 해당 회원의 정보가 없다는 뜻)
@@ -192,7 +193,8 @@ public class Main {
 					System.out.print("아이디 : ");
 					id = sc.nextLine();
 					//중복되는 회원이 있는지 확인
-					// MemberController의 MemberDuplicate 메소드에 id 매개변수로 넣어서 실행
+					// MemberController의 MemberDuplicate 메소드에 입력받은 id를 매개변수로 넣어서 실행
+					//return 값이 true면 중복, false면 사용 가능한 아이디
 					if(!Mcon.MemberDuplicate(id)){
 						//중복되는 회원이 없다면
 						System.out.println("사용 가능한 아이디입니다.");
@@ -201,6 +203,7 @@ public class Main {
 						System.out.println("이미 존재하는 id입니다.");
 					}
 				}
+				//회원가입할 비밀번호, 이름, 주소 사용자에게 입력받기
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
 
@@ -209,7 +212,7 @@ public class Main {
 				System.out.print("주소 : ");
 				String addr = sc.nextLine();
 
-				//id, pw, 이름, 주소 입력받아서 signup 메소드에 전달
+				//입력받은 id, pw, 이름, 주소 signup 메소드에 전달
 				Mcon.signup(id, pw, name, addr);
 			}
 			else if(select == 3) {
