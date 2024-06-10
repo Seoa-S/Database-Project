@@ -131,8 +131,8 @@ public class Main {
 									conn.setAutoCommit(false);
 
 									BasketController.updateOrderList(member.getId(), conn);//주문내역 업데이트
-									BasketController.removeItems(member.getId(), conn); //장바구니에 있던 물건들 없애기
 									BasketController.stockUpdate(member.getId(), conn);//재고 줄이기
+									BasketController.removeItems(member.getId(), conn); //장바구니에 있던 물건들 없애기
 
 									conn.commit();  // 트랜잭션 커밋
 									System.out.println("장바구니 안의 상품이 모두 주문되었습니다.");
@@ -162,10 +162,10 @@ public class Main {
 
 							//상품 제거하기를 눌렀을 경우
 							else if(basketselect == 3){
-									//제거하고 싶은 상품의 mealkitId 입력받기
-									System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
-									int mealkitId = sc.nextInt();
-									BasketController.deleteBasketItem(member.getId(), mealkitId); //장바구니에서 해당 상품 제거
+								//제거하고 싶은 상품의 mealkitId 입력받기
+								System.out.print("제거하고 싶은 상품ID를 입력해주세요 >>");
+								int mealkitId = sc.nextInt();
+								BasketController.deleteBasketItem(member.getId(), mealkitId); //장바구니에서 해당 상품 제거
 							}
 
 							//메인페이지로 이동하기를 눌렀을 경우
@@ -209,6 +209,7 @@ public class Main {
 						System.out.println("이미 존재하는 id입니다.");
 					}
 				}
+				//회원가입할 비밀번호, 이름,
 				//회원가입할 비밀번호, 이름, 주소 사용자에게 입력받기
 				System.out.print("비밀번호 : ");
 				String pw = sc.nextLine();
